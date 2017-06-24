@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/mis_vuelos"
+            android:icon="@drawable/ic_flight_takeoff_black_24dp"
+            android:title="@string/mis_vuelos"/>
+        <item
+            android:id="@+id/ofertas"
+            android:icon="@drawable/ic_redeem_black_24dp"
+            android:title="@string/ofertas"/>
+        <item
+            android:id="@+id/opiniones"
+            android:icon="@drawable/ic_question_answer_black_24dp"
+            android:title="@string/opiniones"/>
+
+    </group>
+
+    <item android:title="@string/ajustes">
+        <menu>
+            <item
+                android:id="@+id/config"
+                android:icon="@drawable/ic_menu_manage"
+                android:title="@string/configuracion"/>
+        </menu>
+    </item>
+
+</menu>
