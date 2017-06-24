@@ -1,6 +1,7 @@
 package jnielavitzky.itba.com.maydaymobile;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,11 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dexafree.materialList.cards.BigImageButtonsCard;
-import com.dexafree.materialList.cards.OnButtonPressListener;
-import com.dexafree.materialList.controller.OnDismissCallback;
-import com.dexafree.materialList.model.Card;
+
+import com.dexafree.materialList.card.Card;
+import com.dexafree.materialList.card.CardProvider;
+import com.dexafree.materialList.card.OnActionClickListener;
+import com.dexafree.materialList.card.action.TextViewAction;
 import com.dexafree.materialList.view.MaterialListView;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created by ioninielavitzky on 6/23/17.
@@ -20,7 +25,8 @@ import com.dexafree.materialList.view.MaterialListView;
 
 public class MisVuelosActivity extends Fragment {
 
-    MaterialListView takeOffCardList;
+
+    MaterialListView cardList;
 
     public MisVuelosActivity() {
     }
@@ -60,12 +66,34 @@ public class MisVuelosActivity extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.mis_vuelos));
 
 
+        cardList = (MaterialListView)view.findViewById(R.id.material_listview);
 
 
-        draw(view);
+
+        int white = Color.WHITE;
+
+
+        for (int i = 0; i < 10; i++) {
+            Card card = new Card.Builder(view.getContext())
+                    .setTag("BASIC_IMAGE_BUTTONS_CARD")
+                    .withProvider(new CardProvider())
+                    .setLayout(R.layout.test)
+//                    .setTitle("Buenos Aires → Asuncion")
+                    .setTitleColor(white)
+                    .setDrawable(R.drawable.test)
+
+                    .endConfig()
+                    .build();
+
+            cardList.getAdapter().add(card);
+        }
+
+
+
 
         return view;
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -113,52 +141,52 @@ public class MisVuelosActivity extends Fragment {
 //        draw(getView());
     }
 
-    private void draw(View view) {
-        takeOffCardList = (MaterialListView) view.findViewById(R.id.CardList);
-        takeOffCardList.setOnDismissCallback(new OnDismissCallback() {
-            @Override
-            public void onDismiss(Card card, int i) {
-
-            }
-        });
-        takeOffCardList.getLayoutManager().offsetChildrenVertical(30);
-        takeOffCardList.setOnDismissCallback(new OnDismissCallback() {
-            @Override
-            public void onDismiss(Card card, int i) {
-                //Toast.makeText(MainActivity.this,)
-            }
-        });
-
-
-        for (int i = 0; i < 10; i++) {
-            BigImageButtonsCard card = new BigImageButtonsCard(((MainActivity) getActivity()));
-
-            card.setTitle("GOla gotosd");
-            card.setDescription("ajshdgjhagsd"+"\n\n" + "Departure : "+"2873624"+"\t\t\t\t"+" Arrival : "+"4273864"+"\n\n"+"Duration : "+"238764");
-            card.setRightButtonText("ADf;adjflajshflkahsdflkjhasdf");
-
-
-            card.setOnRightButtonPressedListener(new OnButtonPressListener() {
-                @Override
-                public void onButtonPressedListener(View view, Card card) {
-
-                }
-            });
-            card.setOnLeftButtonPressedListener(new OnButtonPressListener() {
-                @Override
-                public void onButtonPressedListener(View view, Card card) {
-
-                }
-            });
-
-
-            card.setLeftButtonText("alskdj ads,fjas,d as,dfbm, asdf");
-            //card.setRightButtonText(ob.getString("class"));
-            card.setDividerVisible(true);
-            card.setDrawable(R.drawable.back3);
-            takeOffCardList.add(card);
-
-        }
-    }
+//    private void draw(View view) {
+//        takeOffCardList = (MaterialListView) view.findViewById(R.id.CardList);
+//        takeOffCardList.setOnDismissCallback(new OnDismissCallback() {
+//            @Override
+//            public void onDismiss(Card card, int i) {
+//
+//            }
+//        });
+//        takeOffCardList.getLayoutManager().offsetChildrenVertical(30);
+//        takeOffCardList.setOnDismissCallback(new OnDismissCallback() {
+//            @Override
+//            public void onDismiss(Card card, int i) {
+//                //Toast.makeText(MainActivity.this,)
+//            }
+//        });
+//
+//
+//        for (int i = 0; i < 10; i++) {
+//            BigImageButtonsCard card = new BigImageButtonsCard(((MainActivity) getActivity()));
+//
+//            card.setTitle("GOla gotosd");
+//            card.setDescription("ajshdgjhagsd"+"\n\n" + "Departure : "+"2873624"+"\t\t\t\t"+" Arrival : "+"4273864"+"\n\n"+"Duration : "+"238764");
+//            card.setRightButtonText("ADf;adjflajshflkahsdflkjhasdf");
+//
+//
+//            card.setOnRightButtonPressedListener(new OnButtonPressListener() {
+//                @Override
+//                public void onButtonPressedListener(View view, Card card) {
+//
+//                }
+//            });
+//            card.setOnLeftButtonPressedListener(new OnButtonPressListener() {
+//                @Override
+//                public void onButtonPressedListener(View view, Card card) {
+//
+//                }
+//            });
+//
+//
+//            card.setLeftButtonText("alskdj ads,fjas,d as,dfbm, asdf");
+//            //card.setRightButtonText(ob.getString("class"));
+//            card.setDividerVisible(true);
+//            card.setDrawable(R.drawable.back3);
+//            takeOffCardList.add(card);
+//
+//        }
+//    }
 
 }

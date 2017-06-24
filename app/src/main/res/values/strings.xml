@@ -10,4 +10,10 @@
     <string name="opiniones">Opiniones</string>
     <string name="configuracion">Configuración</string>
     <string name="ajustes">Ajustes</string>
+
+
+
+    <string name="Rs">\u20B9</string>
+    <string name="rs">\u20B9</string>
+    <string name="arrow">\u2192</string>
 </resources>
