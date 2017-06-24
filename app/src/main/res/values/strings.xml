@@ -10,4 +10,6 @@
     <string name="opiniones">Opiniones</string>
     <string name="configuracion">Configuración</string>
     <string name="ajustes">Ajustes</string>
+
+    <string name="queryHint">Ingrese vuelo</string>
 </resources>
