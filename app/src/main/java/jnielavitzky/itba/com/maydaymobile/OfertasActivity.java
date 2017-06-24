@@ -21,11 +21,7 @@ import jnielavitzky.itba.com.maydaymobile.API.Offer;
 
 public class OfertasActivity extends Fragment {
 
-    private Offer myOffers;
-
-    public static void setOffers(Offer of){
-        this.myOffers = of;
-    }
+    public static Offer myOffers;
 
     public OfertasActivity() {
     }

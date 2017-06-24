@@ -42,6 +42,6 @@ public class API extends AsyncTask<Void, Void, Offer> {
     @Override
     protected void onPostExecute(Offer offer) {
         super.onPostExecute(offer);
-        OfertasActivity.setOffers(offer);
+        OfertasActivity.myOffers = offer;
     }
 }
