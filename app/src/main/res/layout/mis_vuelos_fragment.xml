@@ -15,9 +15,29 @@
 
 
 
-    <com.dexafree.materialList.view.MaterialListView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:id="@+id/material_listview"/>
+    <!--<com.dexafree.materialList.view.MaterialListView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:id="@+id/material_listview"-->
+        <!--android:tag="card_list_tag"/>-->
+
+    <ScrollView
+
+
+        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/material_listview"
+            android:stretchColumns="1">
+
+            <!-- everything you already have -->
+
+        </TableLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
