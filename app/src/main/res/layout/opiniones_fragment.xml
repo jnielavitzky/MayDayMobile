@@ -9,10 +9,10 @@
     tools:context="jnielavitzky.itba.com.maydaymobile.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <include
-        layout="@layout/activity_main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+    <!--<include-->
+        <!--layout="@layout/activity_main"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
