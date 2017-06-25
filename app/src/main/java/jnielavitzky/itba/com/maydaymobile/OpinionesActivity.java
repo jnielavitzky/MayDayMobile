@@ -1,19 +1,10 @@
 package jnielavitzky.itba.com.maydaymobile;
 
+import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v4.widget.SimpleCursorAdapter;
 import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -21,10 +12,10 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
-
-import java.net.URL;
+import android.widget.Toast;
 
 
 public class OpinionesActivity extends Fragment implements SearchView.OnQueryTextListener {
@@ -56,7 +47,7 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
         item.setIcon(R.drawable.logo);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         sv = new SearchView(getActivity());
-        sv.setQueryHint("Ingrese vuelo");
+        sv.setQueryHint(getString(R.string.query_hint));
         sv.setOnQueryTextListener(this);
         item.setActionView(sv);
     }
@@ -69,24 +60,73 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
         View rootView = inflater.inflate(R.layout.opiniones_fragment, container, false);
 
-        TableLayout opinions = (TableLayout)rootView.findViewById(R.id.review_scroll);
+        TableLayout opinions = (TableLayout) rootView.findViewById(R.id.review_scroll);
 
         LayoutInflater infl = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout layout = (LinearLayout) infl.inflate(R.layout.rating_template, null);
 
         opinions.addView(layout);
 
+        opinions.setVisibility(View.INVISIBLE);
+
         return rootView;
     }
 
     @Override
     public boolean onQueryTextSubmit(String query) {
-        return false;
+
+        if (query.length() == 1 || query.length() == 2) {
+            Toast.makeText(getContext(), R.string.query_hint, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        String airline_code_1 = query.substring(0);
+
+        if (!Character.isLetter(airline_code_1.charAt(0)) || Character.isSpaceChar(airline_code_1.charAt(0))) {
+            Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        String airline_code_2 = query.substring(1);
+
+        if (!Character.isLetter(airline_code_2.charAt(0)) || Character.isSpaceChar(airline_code_2.charAt(0))) {
+            Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        String flight_number = query.substring(2);
+
+        for (int i = 0; i < flight_number.length(); i++) {
+            if (!Character.isDigit(flight_number.charAt(i))) {
+                Toast.makeText(getContext(), R.string.error_numero_vuelo, Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+
+        return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        return false;
+        if (newText.length() > 6) {
+            Toast.makeText(getContext(), R.string.no_mas_6_caracs, Toast.LENGTH_SHORT).show();
+            sv.setQuery(newText.substring(0, 6), false);
+            return false;
+        }
+
+        return true;
+    }
+
+    public static void hideKeyboard(Context ctx) {
+        InputMethodManager inputManager = (InputMethodManager) ctx
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+
+        // check if no view has focus:
+        View v = ((Activity) ctx).getCurrentFocus();
+        if (v == null)
+            return;
+
+        inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
 //    // These are the Contacts rows that we will retrieve.

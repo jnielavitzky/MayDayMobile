@@ -66,13 +66,13 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:textColor="@color/grey_title"
-                    android:text="1 estrella = muy desconforme"/>
+                    android:text="1 estrella = muy disconforme"/>
                 <TextView
                     android:id="@+id/info_from2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_title"
-                    android:text="5 estrella = muy conforme"
+                    android:text="5 estrellas = muy conforme"
                     android:layout_below="@+id/info_from"/>
 
 
@@ -136,7 +136,7 @@
                     android:textColor="@color/black_button"
                     android:textSize="25sp"
                     android:textAlignment="center"
-                    android:text="Amabilidad"/>
+                    android:text="Comida"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -179,7 +179,7 @@
                     android:textColor="@color/black_button"
                     android:textSize="25sp"
                     android:textAlignment="center"
-                    android:text="Amabilidad"/>
+                    android:text="Puntualidad"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -222,7 +222,7 @@
                     android:textColor="@color/black_button"
                     android:textSize="25sp"
                     android:textAlignment="center"
-                    android:text="Amabilidad"/>
+                    android:text="Programa de viajeros frecuentes"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -265,7 +265,7 @@
                     android:textColor="@color/black_button"
                     android:textSize="25sp"
                     android:textAlignment="center"
-                    android:text="Amabilidad"/>
+                    android:text="Confort"/>
             </RelativeLayout>
 
             <LinearLayout
@@ -308,7 +308,7 @@
                     android:textColor="@color/black_button"
                     android:textSize="25sp"
                     android:textAlignment="center"
-                    android:text="Amabilidad"/>
+                    android:text="Relación precio/calidad"/>
             </RelativeLayout>
 
             <LinearLayout
