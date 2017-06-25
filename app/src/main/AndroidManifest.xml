@@ -22,6 +22,18 @@
             </intent-filter>
         </activity>
         <activity android:name=".AddFlightActivity" />
+        <activity android:name=".ServerChecker" />
+        <receiver android:name="MyStartServiceReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <service
+            android:name=".ServerJobService"
+            android:label="Word service"
+            android:permission="android.permission.BIND_JOB_SERVICE" >
+
+        </service>
     </application>
 
 </manifest>
