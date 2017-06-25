@@ -27,9 +27,7 @@ public class API extends AsyncTask<Void, Void, Offer> {
             return offers;
         } catch (IOException e) {
             Log.d("Error API", "API not responding.");
-            Offer of = new Offer();
-            //TODO: AGREGAR UN OFFER DEFAULT POR SI HAY ERRORES EN LA API.
-            return of;
+            return null;
         }
     }
 
@@ -42,6 +40,6 @@ public class API extends AsyncTask<Void, Void, Offer> {
     @Override
     protected void onPostExecute(Offer offer) {
         super.onPostExecute(offer);
-//        OfertasActivity.myOffers = offer;
+        OfertasActivity.myOffers = offer;
     }
 }
