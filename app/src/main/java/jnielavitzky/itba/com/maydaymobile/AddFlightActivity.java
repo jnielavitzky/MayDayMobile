@@ -8,6 +8,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,11 +20,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -71,11 +76,27 @@ public class AddFlightActivity extends AppCompatActivity{
 
         setTitle(getString(R.string.agregar_vuelo));
 
-        // toolbar
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-
         flight_num = (EditText) findViewById(R.id.flight_num);
+        new Handler().postDelayed(new Runnable() {
+            public void run() {
+                EditText yourEditText= (EditText) findViewById(R.id.flight_num);
+                yourEditText.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_DOWN , 0, 0, 0));
+                yourEditText.dispatchTouchEvent(MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis(), MotionEvent.ACTION_UP , 0, 0, 0));
+            }
+        }, 200);
+        flight_num.setOnKeyListener(new View.OnKeyListener(){
+
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    add_flight();
+                }
+                return true;
+            }
+        });
+
+
         add = (Button) findViewById(R.id.add_button);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,7 +116,14 @@ public class AddFlightActivity extends AppCompatActivity{
 
     private void add_flight() {
 
-        new JsonTask().execute("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=8R&flight_number=" + flight_num.getText().toString());
+        String data = flight_num.getText().toString();
+
+        String airline = data.substring(0, 2);
+        String flight = data.substring(2);
+
+        Log.d(TAG, "add_flight: " + airline + " " + flight);
+
+        new JsonTask().execute("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=" + airline + "&flight_number=" + flight);
 
         pd = new ProgressDialog(this);
         pd.setTitle(R.string.espere_por_favor);
