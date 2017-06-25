@@ -104,7 +104,6 @@ public class AddFlightActivity extends AppCompatActivity{
                 add_flight();
             }
         });
-//        setSupportActionBar(toolbar);
 
         // add back arrow to toolbar
         if (getSupportActionBar() != null){
