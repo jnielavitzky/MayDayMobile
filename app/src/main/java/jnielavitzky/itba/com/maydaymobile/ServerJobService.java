@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import jnielavitzky.itba.com.maydaymobile.APINotify.APINotify;
+import jnielavitzky.itba.com.maydaymobile.APINotify.State;
 
 /**
  * Created by ioninielavitzky on 6/25/17.
@@ -13,6 +14,7 @@ import jnielavitzky.itba.com.maydaymobile.APINotify.APINotify;
 
 public class ServerJobService extends JobService {
     private static final String TAG = "SyncService";
+    public static State state;
 
     @Override
     public boolean onStartJob(JobParameters params) {
@@ -20,8 +22,11 @@ public class ServerJobService extends JobService {
 //        Intent service = new Intent(getApplicationContext(), ServerChecker.class);
 //        getApplicationContext().startService(service);
 
+       //TODO:LE TENES QUE MANDAR UN AIRLINE ID Y UN  FLIGHT NUMBER.
+       new APINotify("8R",8700).execute();
 
-        //TODO: ACA CAPPA
+       //Status va a tener estos valores: S (programado), A (activo), R (desviado), L(aterrizado) y C (cancelado)
+        String status =  state.getStatus().getStatus();
 
 
         Util.scheduleJob(getApplicationContext()); // reschedule the job

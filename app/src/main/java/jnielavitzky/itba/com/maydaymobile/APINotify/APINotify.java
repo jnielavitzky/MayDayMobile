@@ -10,6 +10,7 @@ import java.net.URL;
 
 import jnielavitzky.itba.com.maydaymobile.API.API;
 import jnielavitzky.itba.com.maydaymobile.Notifications.Notifications;
+import jnielavitzky.itba.com.maydaymobile.ServerJobService;
 
 public class APINotify extends AsyncTask<Void, Void, State>{
 
@@ -40,6 +41,6 @@ public class APINotify extends AsyncTask<Void, Void, State>{
     @Override
     protected void onPostExecute(State state) {
         super.onPostExecute(state);
-        
+        ServerJobService.state = state;
     }
 }
