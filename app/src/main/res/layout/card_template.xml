@@ -15,22 +15,31 @@
         card_view:cardCornerRadius="@dimen/card_corner_radius"
         card_view:cardElevation="@dimen/card_elevation">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
 
+
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="15dp"
                 android:paddingLeft="15dp">
+                <ImageButton
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/actionOverflowButtonStyle"
+                    android:id="@+id/card_options"/>
                 <TextView
                     android:id="@+id/estado_title"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:textSize="18sp"
+                    android:layout_marginTop="15dp"
                     android:text="Estado de vuelo: "
                     android:textColor="@color/grey_title"/>
                 <TextView
@@ -38,6 +47,7 @@
                     android:layout_width="100dp"
                     android:layout_height="30dp"
                     android:textSize="18sp"
+                    android:layout_marginTop="15dp"
                     android:text="Aterrizado"
                     android:layout_toRightOf="@+id/estado_title"
                     android:textColor="@color/grey_title"/>

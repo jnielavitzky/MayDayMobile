@@ -16,4 +16,6 @@
     <string name="Rs">\u20B9</string>
     <string name="rs">\u20B9</string>
     <string name="arrow">\u2192</string>
+    <string name="agregar_vuelo">Agregar vuelo</string>
+    <string name="no_mostrar_mas_vuelo">No mostrar mas este vuelo</string>
 </resources>
