@@ -12,4 +12,10 @@
     <string name="ajustes">Ajustes</string>
 
     <string name="queryHint">Ingrese vuelo</string>
+
+
+
+    <string name="Rs">\u20B9</string>
+    <string name="rs">\u20B9</string>
+    <string name="arrow">\u2192</string>
 </resources>

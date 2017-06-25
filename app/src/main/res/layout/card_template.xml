@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.dexafree.materialList.card.CardLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MainLayout"
+    android:id="@+id/cardLayout"
+    android:tag="test_tag">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView"
+        style="@style/Material_Card_View"
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
+        card_view:cardElevation="@dimen/card_elevation">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:paddingLeft="15dp">
+                <TextView
+                    android:id="@+id/estado_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:textSize="18sp"
+                    android:text="Estado de vuelo: "
+                    android:textColor="@color/grey_title"/>
+                <TextView
+                    android:id="@+id/estado"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:textSize="18sp"
+                    android:text="Aterrizado"
+                    android:layout_toRightOf="@+id/estado_title"
+                    android:textColor="@color/grey_title"/>
+
+
+            </RelativeLayout>
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp"
+                android:layout_marginTop="5dp">
+
+                <TextView
+                    android:id="@+id/from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40dp"
+                    android:textStyle="bold"
+                    android:text="EZE"
+                    android:textColor="@color/black_button"/>
+
+                <ImageView
+                    android:id="@+id/plane"
+                    android:layout_width="180dp"
+                    android:layout_height="40dp"
+                    android:padding="5dp"
+                    android:layout_centerInParent="true"
+                    card_view:srcCompat="@drawable/path"/>
+
+                <TextView
+                    android:id="@+id/to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="40dp"
+                    android:textStyle="bold"
+                    android:text="ASU"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="15dp"
+                    android:textColor="@color/black_button"/>
+
+            </RelativeLayout>
+
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/big_padding">
+
+                <TextView
+                    android:id="@+id/info_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/black_button"
+                    android:text="Silvio Pettirossi • Lun, May 29 "/>
+
+
+                <TextView
+                    android:id="@+id/salida_from"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:text="Salida:"
+                    android:layout_below="@+id/info_from"/>
+                <TextView
+                    android:id="@+id/salida_time_from"
+                    android:layout_width="140dp"
+                    android:layout_height="50dp"
+                    android:text="19:30 AM"
+                    android:textSize="30sp"
+                    android:layout_marginRight="50dp"
+                    android:textColor="#049852"
+                    android:layout_below="@+id/salida_from"/>
+
+                <TextView
+                    android:id="@+id/terminal_from"
+                    android:layout_width="65dp"
+                    android:layout_height="20dp"
+                    android:text="Terminal:"
+                    android:layout_marginRight="30dp"
+                    android:layout_below="@+id/info_from"
+                    android:layout_toRightOf="@+id/salida_time_from"/>
+                <TextView
+                    android:id="@+id/terminal_num_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="34"
+                    android:textColor="#049852"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/terminal_from"
+                    android:layout_toRightOf="@+id/salida_time_from"/>
+
+                <TextView
+                    android:id="@+id/gate_from"
+                    android:layout_width="65dp"
+                    android:layout_height="20dp"
+                    android:text="Puerta:"
+                    android:layout_below="@+id/info_from"
+                    android:layout_toRightOf="@+id/terminal_from"/>
+                <TextView
+                    android:id="@+id/gate_num_from"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="K16"
+                    android:textColor="#049852"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/terminal_from"
+                    android:layout_toRightOf="@+id/terminal_from"/>
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/salida_time_from">
+                    <TextView
+                        android:id="@+id/despegue_program"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Despegue programado: "/>
+                    <TextView
+                        android:id="@+id/despegue_program_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toRightOf="@+id/despegue_program"
+                        android:text="15:38 AM"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+            <View style="@style/Divider"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/big_padding">
+
+                <TextView
+                    android:id="@+id/info_to"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/black_button"
+                    android:text="Silvio Pettirossi • Lun, May 29 "/>
+
+
+                <TextView
+                    android:id="@+id/salida_to"
+                    android:layout_width="50dp"
+                    android:layout_height="20dp"
+                    android:text="Salida:"
+                    android:layout_below="@+id/info_to"/>
+                <TextView
+                    android:id="@+id/salida_time_to"
+                    android:layout_width="140dp"
+                    android:layout_height="50dp"
+                    android:text="19:30 AM"
+                    android:textSize="30sp"
+                    android:layout_marginRight="50dp"
+                    android:textColor="#049852"
+                    android:layout_below="@+id/salida_to"/>
+
+                <TextView
+                    android:id="@+id/terminal_to"
+                    android:layout_width="65dp"
+                    android:layout_height="20dp"
+                    android:text="Terminal:"
+                    android:layout_marginRight="30dp"
+                    android:layout_below="@+id/info_to"
+                    android:layout_toRightOf="@+id/salida_time_to"/>
+                <TextView
+                    android:id="@+id/terminal_num_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="34"
+                    android:textColor="#049852"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/terminal_to"
+                    android:layout_toRightOf="@+id/salida_time_to"/>
+
+                <TextView
+                    android:id="@+id/gate"
+                    android:layout_width="65dp"
+                    android:layout_height="20dp"
+                    android:text="Puerta:"
+                    android:layout_below="@+id/info_to"
+                    android:layout_toRightOf="@+id/terminal_to"/>
+                <TextView
+                    android:id="@+id/gate_num_to"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:text="K16"
+                    android:textColor="#049852"
+                    android:textSize="30sp"
+                    android:layout_below="@+id/terminal_to"
+                    android:layout_toRightOf="@+id/terminal_to"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_below="@+id/salida_time_to">
+                    <TextView
+                        android:id="@+id/aterrizaje_program"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Aterrizaje programado: "/>
+                    <TextView
+                        android:id="@+id/aterrizaje_program_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toRightOf="@+id/aterrizaje_program"
+                        android:text="15:38 AM"/>
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</com.dexafree.materialList.card.CardLayout>
