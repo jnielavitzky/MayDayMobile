@@ -19,10 +19,9 @@ public class APINotify extends AsyncTask<Void, Void, State>{
             State state;
             URL url = new URL("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=8R&flight_number=8700");
             state = mapper.readValue(url,State.class);
-            Log.d("aca","LLEGUE BIEN");
             return state;
         } catch(IOException e){
-            Log.d("aca","NO LLEGUE BIEN");
+            Log.d("Error API", "API not responding.");
             return new State();
         }
 

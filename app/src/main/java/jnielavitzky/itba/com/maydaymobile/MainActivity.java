@@ -10,6 +10,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import jnielavitzky.itba.com.maydaymobile.API.API;
 import jnielavitzky.itba.com.maydaymobile.APINotify.APINotify;
+import jnielavitzky.itba.com.maydaymobile.Notifications.Notifications;
 
 
 public class MainActivity extends AppCompatActivity
@@ -46,6 +48,10 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent1, fragment).commit();
 
+        //API
+        new API().execute();
+
+        Notifications.createNotification();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
