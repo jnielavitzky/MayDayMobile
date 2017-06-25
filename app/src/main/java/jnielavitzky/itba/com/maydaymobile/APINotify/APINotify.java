@@ -9,21 +9,37 @@ import java.io.IOException;
 import java.net.URL;
 
 import jnielavitzky.itba.com.maydaymobile.API.API;
+import jnielavitzky.itba.com.maydaymobile.Notifications.Notifications;
 
 public class APINotify extends AsyncTask<Void, Void, State>{
+
+    private Integer number;
+    private String id;
+
+    public APINotify(String id, Integer num) {
+        this.id = id;
+        this.number = num;
+    }
+
 
     @Override
     protected State doInBackground(Void... voids) {
         ObjectMapper mapper = new ObjectMapper();
         try {
             State state;
-            URL url = new URL("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=8R&flight_number=8700");
+            URL url = new URL("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=" +
+                              id + "&flight_number=" + number);
             state = mapper.readValue(url,State.class);
             return state;
         } catch(IOException e){
             Log.d("Error API", "API not responding.");
             return new State();
         }
+    }
 
+    @Override
+    protected void onPostExecute(State state) {
+        super.onPostExecute(state);
+        Notifications.state = state;
     }
 }
