@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<com.dexafree.materialList.card.CardLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MainLayout"
+    android:id="@+id/cardLayout"
+    android:tag="test_tag">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView"
+        style="@style/Material_Card_View"
+        card_view:cardCornerRadius="@dimen/card_corner_radius"
+        card_view:cardElevation="@dimen/card_elevation">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp">
+                <ImageButton
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/actionOverflowButtonStyle"
+                    android:id="@+id/card_options"/>
+                <TextView
+                    android:id="@+id/estado_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="30sp"
+                    android:layout_marginTop="15dp"
+                    android:text="Vuelo AR2374"
+                    android:textColor="@color/black_button"/>
+
+
+
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/big_padding">
+
+                <TextView
+                    android:id="@+id/info_from"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/grey_title"
+                    android:text="1 estrella = muy disconforme"/>
+                <TextView
+                    android:id="@+id/info_from2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/grey_title"
+                    android:text="5 estrellas = muy conforme"
+                    android:layout_below="@+id/info_from"/>
+
+
+
+            </RelativeLayout>
+
+            <View style="@style/Divider"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/big_padding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/black_button"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:text="Amabilidad"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                >
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/big_padding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/black_button"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:text="Comida"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                >
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/big_padding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/black_button"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:text="Puntualidad"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                >
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/big_padding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/black_button"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:text="Programa de viajeros frecuentes"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                >
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/big_padding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/black_button"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:text="Confort"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                >
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/big_padding">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@color/black_button"
+                    android:textSize="25sp"
+                    android:textAlignment="center"
+                    android:text="Relación precio/calidad"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                >
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+                <ImageButton
+                    android:layout_margin="10dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"/>
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</com.dexafree.materialList.card.CardLayout>

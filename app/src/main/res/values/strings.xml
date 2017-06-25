@@ -16,4 +16,12 @@
     <string name="Rs">\u20B9</string>
     <string name="rs">\u20B9</string>
     <string name="arrow">\u2192</string>
+    <string name="agregar_vuelo">Agregar vuelo</string>
+    <string name="no_mostrar_mas_vuelo">No mostrar más este vuelo</string>
+
+    <string name="query_hint">Ingrese vuelo, e.g., AA1490</string>
+    <string name="no_mas_6_caracs">No más de 6 caracteres</string>
+    <string name="error_codigo_aereo">Sólo letras para código aerolínea</string>
+    <string name="error_numero_vuelo">Sólo números para número de vuelo</string>
+
 </resources>

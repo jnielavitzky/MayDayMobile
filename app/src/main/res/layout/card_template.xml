@@ -4,7 +4,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/MainLayout">
+    style="@style/MainLayout"
+    android:id="@+id/cardLayout"
+    android:tag="test_tag">
 
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
@@ -13,37 +15,45 @@
         card_view:cardCornerRadius="@dimen/card_corner_radius"
         card_view:cardElevation="@dimen/card_elevation">
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-            <FrameLayout android:layout_width="match_parent"
-                         android:layout_height="wrap_content">
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:adjustViewBounds="true"
-                    android:scaleType="centerCrop"
-                    android:contentDescription="@null"/>
 
-                <TextView
-                    android:id="@+id/title"
-                    style="@style/Material_Card_Title"
-                    android:layout_gravity="bottom"
-                    tools:text="Title"/>
-            </FrameLayout>
 
-            <TextView
-                android:id="@+id/description"
+
+
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:paddingLeft="15dp"
-                android:layout_marginTop="15dp"
-                android:textSize="18sp"
-                android:text="Estado de vuelo: Aterrizado"
-                android:textColor="@color/grey_title"/>
+                android:layout_height="match_parent"
+                android:paddingLeft="15dp">
+                <ImageButton
+                    android:layout_alignParentRight="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="?android:attr/actionOverflowButtonStyle"
+                    android:id="@+id/card_options"/>
+                <TextView
+                    android:id="@+id/estado_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:textSize="18sp"
+                    android:layout_marginTop="15dp"
+                    android:text="Estado de vuelo: "
+                    android:textColor="@color/grey_title"/>
+                <TextView
+                    android:id="@+id/estado"
+                    android:layout_width="100dp"
+                    android:layout_height="30dp"
+                    android:textSize="18sp"
+                    android:layout_marginTop="15dp"
+                    android:text="Aterrizado"
+                    android:layout_toRightOf="@+id/estado_title"
+                    android:textColor="@color/grey_title"/>
 
+
+            </RelativeLayout>
 
 
 
@@ -93,7 +103,7 @@
                 android:padding="@dimen/big_padding">
 
                 <TextView
-                    android:id="@+id/info"
+                    android:id="@+id/info_from"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
@@ -102,61 +112,73 @@
 
 
                 <TextView
-                    android:id="@+id/salida"
+                    android:id="@+id/salida_from"
                     android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:text="Salida:"
-                    android:layout_below="@+id/info"/>
+                    android:layout_below="@+id/info_from"/>
                 <TextView
-                    android:id="@+id/salida_time"
+                    android:id="@+id/salida_time_from"
                     android:layout_width="140dp"
                     android:layout_height="50dp"
                     android:text="19:30 AM"
                     android:textSize="30sp"
                     android:layout_marginRight="50dp"
                     android:textColor="#049852"
-                    android:layout_below="@+id/salida"/>
+                    android:layout_below="@+id/salida_from"/>
 
                 <TextView
-                    android:id="@+id/terminal"
+                    android:id="@+id/terminal_from"
                     android:layout_width="65dp"
                     android:layout_height="20dp"
                     android:text="Terminal:"
                     android:layout_marginRight="30dp"
-                    android:layout_below="@+id/info"
-                    android:layout_toRightOf="@+id/salida_time"/>
+                    android:layout_below="@+id/info_from"
+                    android:layout_toRightOf="@+id/salida_time_from"/>
                 <TextView
-                    android:id="@+id/terminal_num"
-                    android:layout_width="50dp"
+                    android:id="@+id/terminal_num_from"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="34"
                     android:textColor="#049852"
                     android:textSize="30sp"
-                    android:layout_below="@+id/terminal"
-                    android:layout_toRightOf="@+id/salida_time"/>
+                    android:layout_below="@+id/terminal_from"
+                    android:layout_toRightOf="@+id/salida_time_from"/>
 
                 <TextView
-                    android:id="@+id/gate"
+                    android:id="@+id/gate_from"
                     android:layout_width="65dp"
                     android:layout_height="20dp"
                     android:text="Puerta:"
-                    android:layout_below="@+id/info"
-                    android:layout_toRightOf="@+id/terminal"/>
+                    android:layout_below="@+id/info_from"
+                    android:layout_toRightOf="@+id/terminal_from"/>
                 <TextView
-                    android:id="@+id/gate_num"
-                    android:layout_width="60dp"
+                    android:id="@+id/gate_num_from"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="K16"
                     android:textColor="#049852"
                     android:textSize="30sp"
-                    android:layout_below="@+id/terminal"
-                    android:layout_toRightOf="@+id/terminal"/>
+                    android:layout_below="@+id/terminal_from"
+                    android:layout_toRightOf="@+id/terminal_from"/>
 
-                <TextView
+
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_below="@+id/salida_time"
-                    android:text="Despegue programado: 15:38 AM"/>
+                    android:layout_below="@+id/salida_time_from">
+                    <TextView
+                        android:id="@+id/despegue_program"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Despegue programado: "/>
+                    <TextView
+                        android:id="@+id/despegue_program_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toRightOf="@+id/despegue_program"
+                        android:text="15:38 AM"/>
+                </RelativeLayout>
 
             </RelativeLayout>
 
@@ -168,7 +190,7 @@
                 android:padding="@dimen/big_padding">
 
                 <TextView
-                    android:id="@+id/info"
+                    android:id="@+id/info_to"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
@@ -177,61 +199,72 @@
 
 
                 <TextView
-                    android:id="@+id/salida"
+                    android:id="@+id/salida_to"
                     android:layout_width="50dp"
                     android:layout_height="20dp"
                     android:text="Salida:"
-                    android:layout_below="@+id/info"/>
+                    android:layout_below="@+id/info_to"/>
                 <TextView
-                    android:id="@+id/salida_time"
+                    android:id="@+id/salida_time_to"
                     android:layout_width="140dp"
                     android:layout_height="50dp"
                     android:text="19:30 AM"
                     android:textSize="30sp"
                     android:layout_marginRight="50dp"
                     android:textColor="#049852"
-                    android:layout_below="@+id/salida"/>
+                    android:layout_below="@+id/salida_to"/>
 
                 <TextView
-                    android:id="@+id/terminal"
+                    android:id="@+id/terminal_to"
                     android:layout_width="65dp"
                     android:layout_height="20dp"
                     android:text="Terminal:"
                     android:layout_marginRight="30dp"
-                    android:layout_below="@+id/info"
-                    android:layout_toRightOf="@+id/salida_time"/>
+                    android:layout_below="@+id/info_to"
+                    android:layout_toRightOf="@+id/salida_time_to"/>
                 <TextView
-                    android:id="@+id/terminal_num"
-                    android:layout_width="50dp"
+                    android:id="@+id/terminal_num_to"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="34"
                     android:textColor="#049852"
                     android:textSize="30sp"
-                    android:layout_below="@+id/terminal"
-                    android:layout_toRightOf="@+id/salida_time"/>
+                    android:layout_below="@+id/terminal_to"
+                    android:layout_toRightOf="@+id/salida_time_to"/>
 
                 <TextView
                     android:id="@+id/gate"
                     android:layout_width="65dp"
                     android:layout_height="20dp"
                     android:text="Puerta:"
-                    android:layout_below="@+id/info"
-                    android:layout_toRightOf="@+id/terminal"/>
+                    android:layout_below="@+id/info_to"
+                    android:layout_toRightOf="@+id/terminal_to"/>
                 <TextView
-                    android:id="@+id/gate_num"
-                    android:layout_width="60dp"
+                    android:id="@+id/gate_num_to"
+                    android:layout_width="wrap_content"
                     android:layout_height="50dp"
                     android:text="K16"
                     android:textColor="#049852"
                     android:textSize="30sp"
-                    android:layout_below="@+id/terminal"
-                    android:layout_toRightOf="@+id/terminal"/>
+                    android:layout_below="@+id/terminal_to"
+                    android:layout_toRightOf="@+id/terminal_to"/>
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
-                    android:layout_below="@+id/salida_time"
-                    android:text="Despegue programado: 15:38 AM"/>
+                    android:layout_below="@+id/salida_time_to">
+                    <TextView
+                        android:id="@+id/aterrizaje_program"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:text="Aterrizaje programado: "/>
+                    <TextView
+                        android:id="@+id/aterrizaje_program_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_toRightOf="@+id/aterrizaje_program"
+                        android:text="15:38 AM"/>
+                </RelativeLayout>
 
             </RelativeLayout>
 

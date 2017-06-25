@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import jnielavitzky.itba.com.maydaymobile.API.Offer;
+//import jnielavitzky.itba.com.maydaymobile.API.Offer;
 
 /**
  * Created by ioninielavitzky on 6/23/17.
@@ -21,7 +21,7 @@ import jnielavitzky.itba.com.maydaymobile.API.Offer;
 
 public class OfertasActivity extends Fragment {
 
-    public static Offer myOffers;
+//    public static Offer myOffers;
 
     public OfertasActivity() {
     }
