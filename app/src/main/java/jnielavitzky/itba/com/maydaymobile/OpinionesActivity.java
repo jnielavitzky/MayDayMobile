@@ -18,6 +18,7 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +40,8 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
     SearchView sv;
 
     TableLayout opinions;
+
+    ScrollView scroll;
 
     MenuItem item;
 
@@ -169,15 +172,13 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
         LayoutInflater infl = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout layout = (LinearLayout) infl.inflate(R.layout.rating_template, null);
 
+        scroll = (ScrollView) rootView.findViewById(R.id.scroll);
+
+        scroll.setVisibility(View.INVISIBLE);
+
         opinions.addView(layout);
 
         opinions.setVisibility(View.INVISIBLE);
-
-        if (ingrese != null) {
-            ingrese.cancel();
-        }
-        ingrese = Toast.makeText(getContext(), R.string.query_hint, Toast.LENGTH_SHORT);
-        ingrese.show();
 
         return rootView;
     }
@@ -230,7 +231,7 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
                 if (numeros != null) {
                     numeros.cancel();
                 }
-                numeros = Toast.makeText(getContext(), R.string.error_numero_vuelo, Toast.LENGTH_SHORT);
+                numeros = Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT);
                 numeros.show();
 
                 return false;
@@ -244,6 +245,8 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
         ToggleButton toggleButton = (ToggleButton) getView().findViewById(R.id.recToggle);
         toggleButton.setChecked(true);
+
+        scroll.setVisibility(View.VISIBLE);
 
         opinions.setVisibility(View.VISIBLE);
 
