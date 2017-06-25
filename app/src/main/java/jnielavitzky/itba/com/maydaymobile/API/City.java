@@ -28,6 +28,10 @@ public class City {
         this.name = name;
     }
 
+    public void setName(String[] name) {
+        this.name = name.toString();
+    }
+
     public Double getLatitude() {
         return latitude;
     }
