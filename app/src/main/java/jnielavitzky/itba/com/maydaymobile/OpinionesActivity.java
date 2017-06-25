@@ -1,11 +1,15 @@
 package jnielavitzky.itba.com.maydaymobile;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,12 +28,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
 
 import jnielavitzky.itba.com.maydaymobile.API.Review.ReviewPoster;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
+import static jnielavitzky.itba.com.maydaymobile.MainActivity.TAG;
 
 
 public class OpinionesActivity extends Fragment implements SearchView.OnQueryTextListener {
@@ -50,6 +59,13 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
     int amabilidad, confort, relacion, puntualidad, programa, comida;
 
     Toast seis, ingrese, letras, numeros;
+
+    ProgressDialog pd;
+
+    private static final int SIN_METODO = 1;
+    private static final int METODO_INVALIDO = 2;
+    private static final int REVIEW_INVALIDO = 3;
+    private static final int ERROR_DESCONOCIDO = 4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -252,7 +268,6 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
         sv.clearFocus();
 
-
         return true;
     }
 
@@ -305,16 +320,21 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    String responseStr = response.body().string();
+                    final String responseStr = response.body().string();
                     hideKeyboard(getContext());
 
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(getContext(), R.string.post_exito, Toast.LENGTH_SHORT).show();
+                            pd = new ProgressDialog(getActivity());
+                            pd.setMessage(getString(R.string.espere_por_favor));
+                            pd.setCancelable(false);
+                            pd.show();
+
+                            processResponse(responseStr);
+                            System.out.println(responseStr);
                         }
                     });
 
-                    System.out.println(responseStr);
                 } else {
 
                     getActivity().runOnUiThread(new Runnable() {
@@ -326,6 +346,107 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
                 }
             }
         });
+
+    }
+
+    private void processResponse(String responseStr) {
+        JSONObject jresult;
+
+        try {
+            jresult = new JSONObject(responseStr);
+
+            if (jresult.has("error")) {
+                JSONObject error = jresult.getJSONObject("error");
+                int code = error.getInt("code");
+
+                switch (code) {
+                    case 1: {
+                        error(SIN_METODO);
+                        break;
+                    }
+                    case 100: {
+                        error(METODO_INVALIDO);
+                        break;
+                    }
+                    case 122: {
+                        error(REVIEW_INVALIDO);
+                        break;
+                    }
+                    case 999: {
+                        error(ERROR_DESCONOCIDO);
+                        break;
+                    }
+
+
+                }
+            } else {
+
+                if (pd.isShowing()){
+                    pd.dismiss();
+                }
+
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getContext(), R.string.post_exito, Toast.LENGTH_LONG).show();
+                        sv.clearFocus();
+                    }
+                });
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void error(int code) {
+        Log.d(TAG, "error: code: " + code);
+
+        if (pd.isShowing()) {
+            pd.dismiss();
+        }
+
+        Context context = getContext();
+        String error_s = "";
+
+        switch (code) {
+            case SIN_METODO: {
+                error_s = getString(R.string.SIN_METODO);
+                break;
+            }
+            case METODO_INVALIDO: {
+                error_s = getString(R.string.METODO_INVALIDO);
+                break;
+            }
+            case REVIEW_INVALIDO: {
+                error_s = getString(R.string.REVIEW_INVALIDO);
+                break;
+            }
+            case ERROR_DESCONOCIDO:
+            default: {
+                error_s = getString(R.string.UNKNOWN);
+                break;
+            }
+
+        }
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage(error_s);
+        builder1.setTitle("ERROR");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+        sv.clearFocus();
 
     }
 }

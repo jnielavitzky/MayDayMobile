@@ -47,4 +47,9 @@
     <string name="agregar">Agregar</string>
     <string name="no_flight">Número de vuelo no existente. Por favor, intente otro.</string>
 
+    <string name="SIN_METODO">Método faltante.</string>
+    <string name="METODO_INVALIDO">El nombre del método suministrado es inválido.</string>
+    <string name="REVIEW_INVALIDO">La opinión de la aerolínea suministrado es inválido.</string>
+
+
 </resources>
