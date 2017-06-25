@@ -13,7 +13,7 @@ public class Offer {
     private ArrayList<Deals> deals;
 
     public String getAlgo(){
-        return meta.uuid + " " + currency.id;
+        return getDeals().get(10).getPrice().toString();
     }
 
     public Meta getMeta() {

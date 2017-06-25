@@ -24,6 +24,10 @@ public class API extends AsyncTask<Void, Void, Offer> {
         ObjectMapper mapper = new ObjectMapper();
         try {
             Offer offers = mapper.readValue(new URL("http://hci.it.itba.edu.ar/v1/api/booking.groovy?method=getlastminuteflightdeals&from=BUE"), Offer.class);
+            for(Deals each : offers.getDeals()){
+                each.setPrice(each.getPrice() * 15.7);
+                each.getCity().setName(each.getCity().getName().split(","));
+            }
             return offers;
         } catch (IOException e) {
             Log.d("Error API", "API not responding.");

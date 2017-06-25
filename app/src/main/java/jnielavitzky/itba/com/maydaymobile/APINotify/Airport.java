@@ -16,6 +16,17 @@ public class Airport {
     private City   city;
     private String terminal;
     private String gate;
+    private String bagagge;
+
+    public String getBaggage() {
+        return baggage;
+    }
+
+    public void setBaggage(String baggage) {
+        this.baggage = baggage;
+    }
+
+    private String baggage;
 
     public String getId() {
         return id;

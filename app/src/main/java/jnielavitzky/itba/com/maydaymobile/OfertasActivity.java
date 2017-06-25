@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import jnielavitzky.itba.com.maydaymobile.API.Offer;
+import jnielavitzky.itba.com.maydaymobile.Notifications.Notifications;
 
 //import jnielavitzky.itba.com.maydaymobile.API.Offer;
 
@@ -58,7 +60,6 @@ public class OfertasActivity extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("Test", "onClick: click!");
                 Snackbar.make(view, "Hola boton!", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
