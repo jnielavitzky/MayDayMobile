@@ -46,7 +46,6 @@ import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import static android.app.Activity.RESULT_OK;
 import static jnielavitzky.itba.com.maydaymobile.MainActivity.TAG;
 
 /**
@@ -128,7 +127,11 @@ public class MisVuelosActivity extends Fragment {
         Log.d(TAG, "onCreateView: ticketsL   aoafyhkjahf" + askedTickets);
         for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
             Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
-            new JsonTask().execute("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=8R&flight_number=" + entry.getKey());
+            String data = entry.getKey();
+            String airline = data.substring(0, 2);
+            String flight = data.substring(2);
+
+            new JsonTask().execute("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=" + airline + "&flight_number=" + flight);
         }
 
 
