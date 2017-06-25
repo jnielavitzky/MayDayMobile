@@ -5,6 +5,8 @@ import android.app.job.JobService;
 import android.content.Intent;
 import android.util.Log;
 
+import jnielavitzky.itba.com.maydaymobile.APINotify.APINotify;
+
 /**
  * Created by ioninielavitzky on 6/25/17.
  */
@@ -17,6 +19,10 @@ public class ServerJobService extends JobService {
         Log.d("ServerChecker", "onCreate: start!");
 //        Intent service = new Intent(getApplicationContext(), ServerChecker.class);
 //        getApplicationContext().startService(service);
+
+
+        //TODO: ACA CAPPA
+
 
         Util.scheduleJob(getApplicationContext()); // reschedule the job
         return true;
