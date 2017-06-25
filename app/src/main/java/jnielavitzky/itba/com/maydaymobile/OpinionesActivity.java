@@ -1,5 +1,6 @@
 package jnielavitzky.itba.com.maydaymobile;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -20,6 +21,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
 
 import java.net.URL;
 
@@ -65,6 +68,13 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
         ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.opiniones));
 
         View rootView = inflater.inflate(R.layout.opiniones_fragment, container, false);
+
+        TableLayout opinions = (TableLayout)rootView.findViewById(R.id.review_scroll);
+
+        LayoutInflater infl = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LinearLayout layout = (LinearLayout) infl.inflate(R.layout.rating_template, null);
+
+        opinions.addView(layout);
 
         return rootView;
     }

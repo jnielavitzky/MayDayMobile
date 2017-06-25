@@ -57,9 +57,6 @@ public class MisVuelosActivity extends Fragment {
         });
 
 
-
-
-
         // Inflate the layout for this fragment
         ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.mis_vuelos));
 
