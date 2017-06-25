@@ -1,99 +1,134 @@
 package jnielavitzky.itba.com.maydaymobile;
 
-/**
- * Created by ioninielavitzky on 6/23/17.
- */
-
-import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
+import android.provider.ContactsContract;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
+import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-/**
- * Created by ioninielavitzky on 6/23/17.
- */
+import java.net.URL;
 
-public class OpinionesActivity extends Fragment {
 
-    public OpinionesActivity() {
-    }
+public class OpinionesActivity extends Fragment implements SearchView.OnQueryTextListener {
 
-    public static MisVuelosActivity newInstance(String param1, String param2) {
-        MisVuelosActivity fragment = new MisVuelosActivity();
-        Bundle args = new Bundle();
-//        args.putString(ARG_PARAM1, param1);
-//        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+
+    String flight_number;
+
+    SearchView sv;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+
+        // We have a menu item to show in action bar.
+        setHasOptionsMenu(true);
+
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        // Place an action bar item for searching.
+        MenuItem item = menu.add("Search");
+        item.setIcon(R.drawable.logo);
+        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+        sv = new SearchView(getActivity());
+        sv.setQueryHint("Ingrese vuelo");
+        sv.setOnQueryTextListener(this);
+        item.setActionView(sv);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
-        View view  = inflater.inflate(R.layout.opiniones_fragment, container, false);
-
-
 
         ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.opiniones));
 
+        View rootView = inflater.inflate(R.layout.opiniones_fragment, container, false);
 
-        return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-//        if (mListener != null) {
-//            mListener.onFragmentInteraction(uri);
-//        }
+        return rootView;
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
+
+//    // These are the Contacts rows that we will retrieve.
+//    static final String[] CONTACTS_SUMMARY_PROJECTION = new String[] {
+//            ContactsContract.Contacts._ID,
+//            ContactsContract.Contacts.DISPLAY_NAME,
+//            ContactsContract.Contacts.CONTACT_STATUS,
+//            ContactsContract.Contacts.CONTACT_PRESENCE,
+//            ContactsContract.Contacts.PHOTO_ID,
+//            ContactsContract.Contacts.LOOKUP_KEY,
+//    };
+
+//    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+//        // This is called when a new Loader needs to be created.  This
+//        // sample only has one Loader, so we don't care about the ID.
+//        // First, pick the base URI to use depending on whether we are
+//        // currently filtering.
+//        Uri baseUri;
+//        if (mCurFilter != null) {
+//            baseUri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_FILTER_URI,
+//                    Uri.encode(mCurFilter));
 //        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
+//            baseUri = ContactsContract.Contacts.CONTENT_URI;
 //        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-//        mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }
+//
+//        // Now create and return a CursorLoader that will take care of
+//        // creating a Cursor for the data being displayed.
+//        String select = "((" + ContactsContract.Contacts.DISPLAY_NAME + " NOTNULL) AND ("
+//                + ContactsContract.Contacts.HAS_PHONE_NUMBER + "=1) AND ("
+//                + ContactsContract.Contacts.DISPLAY_NAME + " != '' ))";
+//        return new CursorLoader(getActivity(), baseUri,
+//                CONTACTS_SUMMARY_PROJECTION, select, null,
+//                ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
+//    }
+//
+//    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+//        // Swap the new cursor in.  (The framework will take care of closing the
+//        // old cursor once we return.)
+//        mAdapter.swapCursor(data);
+//
+//        // The list should now be shown.
+//        if (isResumed()) {
+////            setListShown(true);
+//        } else {
+////            setListShownNoAnimation(true);
+//        }
+//    }
+//
+//    public void onLoaderReset(Loader<Cursor> loader) {
+//        // This is called when the last Cursor provided to onLoadFinished()
+//        // above is about to be closed.  We need to make sure we are no
+//        // longer using it.
+//        mAdapter.swapCursor(null);
+//    }
 }
