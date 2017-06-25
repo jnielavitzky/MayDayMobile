@@ -4,5 +4,25 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+        <EditText
+            android:id="@+id/flight_num"
+            android:inputType="text"
+            android:textColor="@color/black_button"
+            android:hint="@string/ingrese_vuelo"
+            android:layout_height="40dp"
+            android:layout_width="match_parent"/>
+
+        <Button
+            android:id="@+id/add_button"
+            android:layout_width="match_parent"
+            android:text="@string/agregar"
+            android:layout_height="45dp"/>
+    </LinearLayout>
+
 
 </LinearLayout>

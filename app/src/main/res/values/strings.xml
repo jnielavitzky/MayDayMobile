@@ -33,5 +33,18 @@
     <string name="post_exito">¡Gracias por su opinión!</string>
     <string name="post_fracaso">Algo salió mal, intente luego</string>
     <string name="post_error">Ocurrió un error, intente luego</string>
+    <string name="espere_por_favor">Espere por favor</string>
+    <string name="programado">Programado</string>
+    <string name="activo">Activo</string>
+    <string name="desviado">Desviado</string>
+    <string name="aterrizado">Aterrizado</string>
+    <string name="cancelado">Cancelado</string>
+    <string name="ITBA_SERVER_ERROR">Hubo un error en el servidor, por favor intente de nuevo mas tarde.</string>
+    <string name="NO_CONNECTION_ERROR">Hubo un error en la comunicación. Por favor intente de nuevo mas tarde.</string>
+    <string name="TIMEOUT">La conexión parece ser muy lenta, por favor intente de nuevo mas tarde.</string>
+    <string name="UNKNOWN">Error desconosido. Por favor intente de nuevo mas tarde.</string>
+    <string name="ingrese_vuelo">Ingrese numero de vuelo</string>
+    <string name="agregar">Agregar</string>
+    <string name="no_flight">Numero de vuelo no existente. Por favor, intente otro.</string>
 
 </resources>
