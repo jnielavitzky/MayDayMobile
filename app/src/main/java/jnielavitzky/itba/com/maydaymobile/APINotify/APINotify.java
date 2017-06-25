@@ -40,6 +40,6 @@ public class APINotify extends AsyncTask<Void, Void, State>{
     @Override
     protected void onPostExecute(State state) {
         super.onPostExecute(state);
-        Notifications.state = state;
+        
     }
 }
