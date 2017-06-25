@@ -29,6 +29,13 @@
         <!--android:layout_height="fill_parent"-->
         <!--android:id="@+id/material_listview"-->
         <!--android:tag="card_list_tag"/>-->
+        <TextView
+            android:id="@+id/no_vuelos"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            android:paddingTop="200dp"
+            android:text="No hay vuelos guardados."/>
 
         <ScrollView
 
@@ -36,6 +43,7 @@
             android:orientation="horizontal"
             android:layout_height="match_parent"
             android:layout_width="match_parent">
+
 
             <TableLayout
                 android:layout_width="match_parent"

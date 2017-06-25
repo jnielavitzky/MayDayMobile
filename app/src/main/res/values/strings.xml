@@ -39,5 +39,12 @@
     <string name="desviado">Desviado</string>
     <string name="aterrizado">Aterrizado</string>
     <string name="cancelado">Cancelado</string>
+    <string name="ITBA_SERVER_ERROR">Hubo un error en el servidor, por favor intente de nuevo mas tarde.</string>
+    <string name="NO_CONNECTION_ERROR">Hubo un error en la comunicación. Por favor intente de nuevo mas tarde.</string>
+    <string name="TIMEOUT">La conexión parece ser muy lenta, por favor intente de nuevo mas tarde.</string>
+    <string name="UNKNOWN">Error desconosido. Por favor intente de nuevo mas tarde.</string>
+    <string name="ingrese_vuelo">Ingrese numero de vuelo</string>
+    <string name="agregar">Agregar</string>
+    <string name="no_flight">Numero de vuelo no existente. Por favor, intente otro.</string>
 
 </resources>

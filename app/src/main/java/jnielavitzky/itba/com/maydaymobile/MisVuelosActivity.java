@@ -2,12 +2,17 @@ package jnielavitzky.itba.com.maydaymobile;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.PopupMenu;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,7 +37,16 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
+import static android.app.Activity.RESULT_OK;
 import static jnielavitzky.itba.com.maydaymobile.MainActivity.TAG;
 
 /**
@@ -43,15 +57,31 @@ public class MisVuelosActivity extends Fragment {
 
     private static final int NO_CONNECTION_ERROR = 1;
     private static final int ITBA_SERVER_ERROR = 2;
+    private static final int TIMEOUT = 3;
     private String lastPressedCard;
 
     ProgressDialog pd;
 
     private View view;
 
+    private int askedTickets = 0;
+
 
     public MisVuelosActivity() {}
 
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==1){
+//            Intent refresh = new Intent(this, MainActivity.class);
+//            startActivity(refresh);
+            draw();
+            Log.d(TAG, "onActivityResult: TEFDSXAGFDSEGF");
+
+        }
+    }
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -64,12 +94,15 @@ public class MisVuelosActivity extends Fragment {
         final View view = inflater.inflate(R.layout.mis_vuelos_fragment, container, false);
         this.view = view;
 
+
+
+
         FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), AddFlightActivity.class);
-                getActivity().startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -77,38 +110,52 @@ public class MisVuelosActivity extends Fragment {
         ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.mis_vuelos));
 
 
-
-
-        new JsonTask().execute("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=8R&flight_number=8700");
-
-        pd = new ProgressDialog(getActivity());
-        pd.setMessage(getString(R.string.espere_por_favor));
-        pd.setCancelable(false);
-        pd.show();
-
-//        //Sample data
-//        JSONObject data = new JSONObject();
-//        try {
-//            data.put("desde", "ARG");
-//            data.put("hasta", "MIA");
-//            data.put("estado", "Aterrizado");
-//            data.put("info_from", "Silvio Pettirossi • Lun, May 29 ");
-//            data.put("salida_time_from", "12:34 AM");
-//            data.put("terminal_num_from", "K2");
-//            data.put("gate_num_from", "Q12");
-//            data.put("despegue_program_time", "22:23 AM");
-//
-//            data.put("info_to", "Ministro Pistarini • Lun, May 29 ");
-//            data.put("salida_time_to", "22:34 AM");
-//            data.put("terminal_num_to", "A12");
-//            data.put("gate_num_to", "B234");
-//            data.put("aterrizaje_program_time", "02:33 AM");
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-
+        draw();
         return view;
+    }
+
+    private void draw(){
+        TextView no_vuelos = (TextView) view.findViewById(R.id.no_vuelos);
+
+        TableLayout cardList = (TableLayout)view.findViewById(R.id.material_listview);
+        cardList.removeAllViews();
+
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
+//        sharedPref.edit().clear().commit();
+        Map<String, ?> allEntries = sharedPref.getAll();
+
+        askedTickets = allEntries.size();
+        Log.d(TAG, "onCreateView: ticketsL   aoafyhkjahf" + askedTickets);
+        for (Map.Entry<String, ?> entry : allEntries.entrySet()) {
+            Log.d("map values", entry.getKey() + ": " + entry.getValue().toString());
+            new JsonTask().execute("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=8R&flight_number=" + entry.getKey());
+        }
+
+
+        if (askedTickets != 0) {
+            if (no_vuelos != null)
+                no_vuelos.setVisibility(View.GONE);
+            pd = new ProgressDialog(getActivity());
+            pd.setMessage(getString(R.string.espere_por_favor));
+            pd.setCancelable(false);
+            pd.show();
+
+
+            Timer t = new Timer();
+            t.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    timeout();
+                }
+            }, 6000L);
+        }
+    }
+    
+    private void timeout(){
+        Log.d(TAG, "timeout: timeout");
+        if (askedTickets != 0){
+            error(TIMEOUT);
+        }
     }
 
     private void showPopupMenu(View view) {
@@ -141,11 +188,13 @@ public class MisVuelosActivity extends Fragment {
             if (child instanceof CardLayout && child.getTag().equals(card_id)) {
                 cardList.removeView(child);
                 //TODO: Eliminar de aca el vuelo favorito.
+                SharedPreferences sharedPref = getActivity().getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
+                sharedPref.edit().remove(card_id).commit();
             }
         }
     }
 
-    private void fillData(LinearLayout card, JSONObject data) throws JSONException {
+    private void fillData(LinearLayout card, JSONObject data, String status_code) throws JSONException {
 
         TextView desde = (TextView)card.findViewById(R.id.from);
         desde.setText(data.getString("desde"));
@@ -185,6 +234,16 @@ public class MisVuelosActivity extends Fragment {
 
         TextView aterrizaje_program_time = (TextView)card.findViewById(R.id.aterrizaje_program_time);
         aterrizaje_program_time.setText(data.getString("aterrizaje_program_time"));
+
+        if (status_code.equals("C") || status_code.equals("R")) {
+            salida_time_from.setTextColor(Color.RED);
+            terminal_num_from.setTextColor(Color.RED);
+            gate_num_from.setTextColor(Color.RED);
+
+            salida_time_to.setTextColor(Color.RED);
+            terminal_num_to.setTextColor(Color.RED);
+            gate_num_to.setTextColor(Color.RED);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -279,9 +338,6 @@ public class MisVuelosActivity extends Fragment {
         @Override
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
-            if (pd.isShowing()){
-                pd.dismiss();
-            }
             if (result == null || result.equals("")){
                 error(NO_CONNECTION_ERROR);
                 return;
@@ -292,19 +348,23 @@ public class MisVuelosActivity extends Fragment {
             try {
                 JSONObject jresult = new JSONObject(result);
                 processData(jresult);
-            } catch (JSONException e) {
+            } catch (JSONException | ParseException e) {
                 error(ITBA_SERVER_ERROR);
             }
         }
     }
 
-    private void processData(JSONObject data) throws JSONException {
+    private void processData(JSONObject data) throws JSONException, ParseException {
 
 
 
         if (data.has("error")){
             JSONObject error = data.getJSONObject("error");
-            error(error.getInt("code"));
+            int code = error.getInt("code");
+            if (code != 136)
+                error(error.getInt("code"));
+            else
+                askedTickets--;
             return;
         }
 
@@ -328,22 +388,62 @@ public class MisVuelosActivity extends Fragment {
         String departure_gate = departure_airport.getString("gate");
         String departure_airport_desc = simplify(departure_airport.getString("description"));
 
+        String departure_time = departure.getString("scheduled_time");
+        String departure_date_formated = getDate(departure_time, "EE MMMM, yyyy");
+        String departure_time_formated = getTime(departure_time, "H:mm a");
+
+        String departure_scheduled_time = departure.getString("scheduled_time");
+        String departure_scheduled_time_formated = getTime(departure_scheduled_time, "H:mm a");
+
+        if (departure_terminal == null || departure_terminal.equals("null"))
+            departure_terminal = "-";
+
+        if (departure_gate == null || departure_gate.equals("null"))
+            departure_gate = "-";
+
+
+
+
+        JSONObject arrival = status.getJSONObject("arrival");
+        JSONObject arrival_airport = arrival.getJSONObject("airport");
+        String arrival_airport_id = arrival_airport.getString("id");
+        String arrival_terminal = arrival_airport.getString("terminal");
+        String arrival_gate = arrival_airport.getString("gate");
+        String arrival_airport_desc = simplify(arrival_airport.getString("description"));
+
+        String arrival_time = arrival.getString("scheduled_time");
+        String arrival_date_formated = getDate(arrival_time, "EE MMMM, yyyy");
+        String arrival_time_formated = getTime(arrival_time, "H:mm a");
+
+
+        String arrival_scheduled_time = arrival.getString("scheduled_time");
+        String arrival_scheduled_time_formated = getTime(arrival_scheduled_time, "H:mm a");
+
+
+        if (arrival_terminal == null || arrival_terminal.equals("null"))
+            arrival_terminal = "-";
+
+        if (arrival_gate == null || arrival_gate.equals("null"))
+            arrival_gate = "-";
+
+
+
 
 
         JSONObject status_data = new JSONObject();
-        data.put("desde", departure_airport_id);
-        data.put("hasta", "MIA");
-        data.put("estado", status_string);
-        data.put("info_from", departure_airport_desc + " • Lun, May 29 ");
-        data.put("salida_time_from", "12:34 AM");
-        data.put("terminal_num_from", departure_terminal);
-        data.put("gate_num_from", departure_gate);
-        data.put("despegue_program_time", "22:23 AM");
-        data.put("info_to", "Ministro Pistarini • Lun, May 29 ");
-        data.put("salida_time_to", "22:34 AM");
-        data.put("terminal_num_to", "A12");
-        data.put("gate_num_to", "B234");
-        data.put("aterrizaje_program_time", "02:33 AM");
+        status_data.put("desde", departure_airport_id);
+        status_data.put("hasta", arrival_airport_id);
+        status_data.put("estado", status_string);
+        status_data.put("info_from", departure_airport_desc + " • " + departure_date_formated);
+        status_data.put("salida_time_from", departure_time_formated);
+        status_data.put("terminal_num_from", departure_terminal);
+        status_data.put("gate_num_from", departure_gate);
+        status_data.put("despegue_program_time", departure_scheduled_time_formated);
+        status_data.put("info_to", arrival_airport_desc + " • " + arrival_date_formated);
+        status_data.put("salida_time_to", arrival_time_formated);
+        status_data.put("terminal_num_to", arrival_terminal);
+        status_data.put("gate_num_to", arrival_gate);
+        status_data.put("aterrizaje_program_time", arrival_scheduled_time_formated);
 
 
 
@@ -352,7 +452,7 @@ public class MisVuelosActivity extends Fragment {
         LayoutInflater infl = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout layout = (LinearLayout) infl.inflate(R.layout.card_template, null);
 
-        fillData(layout, data);
+        fillData(layout, status_data, status_code);
 
 
 
@@ -372,6 +472,29 @@ public class MisVuelosActivity extends Fragment {
 
         cardList.addView(layout);
 
+        askedTickets--;
+        if (askedTickets == 0){
+            if (pd.isShowing()){
+                pd.dismiss();
+            }
+        }
+
+    }
+
+    private String getDate(String string, String new_format) throws ParseException {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new Locale("es", "ES"));
+        Date d = format.parse(string);
+
+        DateFormat newformat = new SimpleDateFormat(new_format, new Locale("es", "ES"));
+        return newformat.format(d);
+    }
+
+    private String getTime(String string, String new_format) throws ParseException {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", new Locale("es", "ES"));
+        Date d = format.parse(string);
+
+        DateFormat newformat = new SimpleDateFormat(new_format, Locale.US);
+        return newformat.format(d);
     }
 
     private String simplify(String s) {
@@ -406,8 +529,54 @@ public class MisVuelosActivity extends Fragment {
         }
     }
 
+
     private void error(int code) {
+        askedTickets = 0;
         Log.d(TAG, "error: code: " + code);
+        if (pd.isShowing()){
+            pd.dismiss();
+        }
+
+        Context context = getContext();
+        String error_s = "";
+        switch (code) {
+            case 136:
+            case ITBA_SERVER_ERROR:{
+                error_s = getString(R.string.ITBA_SERVER_ERROR);
+                break;
+            }
+            case NO_CONNECTION_ERROR:{
+                error_s = getString(R.string.NO_CONNECTION_ERROR);
+                break;
+            }
+            case TIMEOUT:{
+                error_s = getString(R.string.TIMEOUT);
+                break;
+            }
+            case 999:
+            default: {
+                error_s = getString(R.string.UNKNOWN);
+                break;
+            }
+
+        }
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage(error_s);
+        builder1.setTitle("ERROR");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
     }
 
 }
