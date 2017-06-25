@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import jnielavitzky.itba.com.maydaymobile.API.Offer;
+
 //import jnielavitzky.itba.com.maydaymobile.API.Offer;
 
 /**
@@ -21,7 +23,7 @@ import android.widget.Button;
 
 public class OfertasActivity extends Fragment {
 
-//    public static Offer myOffers;
+    public static Offer myOffers;
 
     public OfertasActivity() {
     }
