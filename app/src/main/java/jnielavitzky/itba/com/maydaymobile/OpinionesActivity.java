@@ -1,6 +1,5 @@
 package jnielavitzky.itba.com.maydaymobile;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +11,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.Toast;
+
+import java.io.IOException;
+
+import jnielavitzky.itba.com.maydaymobile.API.Review.ReviewPoster;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
 
 
 public class OpinionesActivity extends Fragment implements SearchView.OnQueryTextListener {
@@ -103,6 +108,27 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
             }
         }
 
+        ReviewPoster rp = new ReviewPoster();
+
+        rp.post("http://hci.it.itba.edu.ar/v1/api/review.groovy?method=reviewairline", rp.bowlingJson("AA", 1490, 2, 2, 2, 2, 2, 2, true, "ANDROID!"), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Something went wrong
+                e.printStackTrace();
+                System.out.println("ERRRROR");
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseStr = response.body().string();
+                    System.out.println(responseStr);
+                } else {
+                    System.out.println("NOT SUCCEESSFULLL");
+                }
+            }
+        });
+
         return true;
     }
 
@@ -115,18 +141,6 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
         }
 
         return true;
-    }
-
-    public static void hideKeyboard(Context ctx) {
-        InputMethodManager inputManager = (InputMethodManager) ctx
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-
-        // check if no view has focus:
-        View v = ((Activity) ctx).getCurrentFocus();
-        if (v == null)
-            return;
-
-        inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
 //    // These are the Contacts rows that we will retrieve.
