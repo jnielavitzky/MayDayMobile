@@ -1,5 +1,6 @@
 package jnielavitzky.itba.com.maydaymobile;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,9 +12,16 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RatingBar;
 import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 
 import java.io.IOException;
 
@@ -26,14 +34,24 @@ import okhttp3.Response;
 public class OpinionesActivity extends Fragment implements SearchView.OnQueryTextListener {
 
 
-    String flight_number;
+    String flight_id;
 
     SearchView sv;
+
+    TableLayout opinions;
+
+    MenuItem item;
+
+    boolean yes_recommend;
+
+    int amabilidad, confort, relacion, puntualidad, programa, comida;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        yes_recommend = true;
+        amabilidad = comida = programa = puntualidad = confort = relacion = 1;
     }
 
     @Override
@@ -43,12 +61,91 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
         // We have a menu item to show in action bar.
         setHasOptionsMenu(true);
 
+        ToggleButton toggle = (ToggleButton) getView().findViewById(R.id.recToggle);
+        toggle.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    yes_recommend = true;
+                } else {
+                    yes_recommend = false;
+                }
+            }
+        });
+
+        Button button = (Button) getView().findViewById(R.id.listo);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                processReview(flight_id);
+            }
+        });
+
+        RatingBar rb_amabilidad = (RatingBar) getView().findViewById(R.id.amabilidad_ratingBar);
+        rb_amabilidad.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                amabilidad = (int) rating;
+            }
+        });
+
+        RatingBar rb_comida = (RatingBar) getView().findViewById(R.id.comida_ratingBar);
+        rb_comida.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                comida = (int) rating;
+            }
+        });
+
+        RatingBar rb_puntualidad = (RatingBar) getView().findViewById(R.id.puntualidad_ratingBar);
+        rb_puntualidad.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                puntualidad = (int) rating;
+            }
+        });
+
+        RatingBar rb_programa = (RatingBar) getView().findViewById(R.id.programa_ratingBar);
+        rb_programa.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                programa = (int) rating;
+            }
+        });
+
+        RatingBar rb_confort = (RatingBar) getView().findViewById(R.id.confort_ratingBar);
+        rb_confort.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                confort = (int) rating;
+            }
+        });
+
+        RatingBar rb_relacion = (RatingBar) getView().findViewById(R.id.relacion_ratingBar);
+        rb_relacion.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float rating,
+                                        boolean fromUser) {
+                relacion = (int) rating;
+            }
+        });
+
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         // Place an action bar item for searching.
-        MenuItem item = menu.add("Search");
+        item = menu.add("Search");
         item.setIcon(R.drawable.logo);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
         sv = new SearchView(getActivity());
@@ -65,7 +162,7 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
         View rootView = inflater.inflate(R.layout.opiniones_fragment, container, false);
 
-        TableLayout opinions = (TableLayout) rootView.findViewById(R.id.review_scroll);
+        opinions = (TableLayout) rootView.findViewById(R.id.review_scroll);
 
         LayoutInflater infl = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout layout = (LinearLayout) infl.inflate(R.layout.rating_template, null);
@@ -108,26 +205,18 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
             }
         }
 
-        ReviewPoster rp = new ReviewPoster();
+        flight_id = query;
 
-        rp.post("http://hci.it.itba.edu.ar/v1/api/review.groovy?method=reviewairline", rp.bowlingJson("AA", 1490, 2, 2, 2, 2, 2, 2, true, "ANDROID!"), new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                // Something went wrong
-                e.printStackTrace();
-                System.out.println("ERRRROR");
-            }
+        TextView flightTitle = (TextView) getView().findViewById(R.id.estado_title);
+        flightTitle.setText(getText(R.string.titulo_vuelo) + " " + query.toUpperCase());
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                if (response.isSuccessful()) {
-                    String responseStr = response.body().string();
-                    System.out.println(responseStr);
-                } else {
-                    System.out.println("NOT SUCCEESSFULLL");
-                }
-            }
-        });
+        ToggleButton toggleButton = (ToggleButton) getView().findViewById(R.id.recToggle);
+        toggleButton.setChecked(true);
+
+        opinions.setVisibility(View.VISIBLE);
+
+        sv.clearFocus();
+
 
         return true;
     }
@@ -143,56 +232,58 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
         return true;
     }
 
-//    // These are the Contacts rows that we will retrieve.
-//    static final String[] CONTACTS_SUMMARY_PROJECTION = new String[] {
-//            ContactsContract.Contacts._ID,
-//            ContactsContract.Contacts.DISPLAY_NAME,
-//            ContactsContract.Contacts.CONTACT_STATUS,
-//            ContactsContract.Contacts.CONTACT_PRESENCE,
-//            ContactsContract.Contacts.PHOTO_ID,
-//            ContactsContract.Contacts.LOOKUP_KEY,
-//    };
+    private static void hideKeyboard(Context ctx) {
+        InputMethodManager inputManager = (InputMethodManager) ctx
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
 
-//    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-//        // This is called when a new Loader needs to be created.  This
-//        // sample only has one Loader, so we don't care about the ID.
-//        // First, pick the base URI to use depending on whether we are
-//        // currently filtering.
-//        Uri baseUri;
-//        if (mCurFilter != null) {
-//            baseUri = Uri.withAppendedPath(ContactsContract.Contacts.CONTENT_FILTER_URI,
-//                    Uri.encode(mCurFilter));
-//        } else {
-//            baseUri = ContactsContract.Contacts.CONTENT_URI;
-//        }
-//
-//        // Now create and return a CursorLoader that will take care of
-//        // creating a Cursor for the data being displayed.
-//        String select = "((" + ContactsContract.Contacts.DISPLAY_NAME + " NOTNULL) AND ("
-//                + ContactsContract.Contacts.HAS_PHONE_NUMBER + "=1) AND ("
-//                + ContactsContract.Contacts.DISPLAY_NAME + " != '' ))";
-//        return new CursorLoader(getActivity(), baseUri,
-//                CONTACTS_SUMMARY_PROJECTION, select, null,
-//                ContactsContract.Contacts.DISPLAY_NAME + " COLLATE LOCALIZED ASC");
-//    }
-//
-//    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-//        // Swap the new cursor in.  (The framework will take care of closing the
-//        // old cursor once we return.)
-//        mAdapter.swapCursor(data);
-//
-//        // The list should now be shown.
-//        if (isResumed()) {
-////            setListShown(true);
-//        } else {
-////            setListShownNoAnimation(true);
-//        }
-//    }
-//
-//    public void onLoaderReset(Loader<Cursor> loader) {
-//        // This is called when the last Cursor provided to onLoadFinished()
-//        // above is about to be closed.  We need to make sure we are no
-//        // longer using it.
-//        mAdapter.swapCursor(null);
-//    }
+        // check if no view has focus:
+        View v = ((Activity) ctx).getCurrentFocus();
+        if (v == null)
+            return;
+
+        inputManager.hideSoftInputFromWindow(v.getWindowToken(), 0);
+    }
+
+    private void processReview(String query) {
+
+        ReviewPoster rp = new ReviewPoster();
+
+        EditText editText = (EditText) getView().findViewById(R.id.comentarios);
+        String comentarios = editText.getText().toString();
+
+        rp.post(getResources().getString(R.string.review_post_url), rp.bowlingJson(query.substring(0, 2).toUpperCase(), Integer.parseInt(query.substring(2)),
+                amabilidad, comida, puntualidad, programa, confort, relacion, yes_recommend, comentarios), new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                // Something went wrong
+                e.printStackTrace();
+                Toast.makeText(getContext(), R.string.post_error, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseStr = response.body().string();
+                    hideKeyboard(getContext());
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(getContext(), R.string.post_exito, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    System.out.println(responseStr);
+                } else {
+
+                    getActivity().runOnUiThread(new Runnable() {
+                        public void run() {
+                            Toast.makeText(getContext(), R.string.post_fracaso, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                }
+            }
+        });
+
+    }
 }

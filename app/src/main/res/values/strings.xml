@@ -23,5 +23,15 @@
     <string name="no_mas_6_caracs">No más de 6 caracteres</string>
     <string name="error_codigo_aereo">Sólo letras para código aerolínea</string>
     <string name="error_numero_vuelo">Sólo números para número de vuelo</string>
+    <string name="titulo_vuelo">Vuelo</string>
+    <string name="rec_a_otros">¿Lo recomendaría a otros?</string>
+    <string name="no">NO</string>
+    <string name="si">SI</string>
+    <string name="comentarios_hint">Ingrese sus comentarios</string>
+    <string name="comentarios_listo">LISTO</string>
+    <string name="review_post_url">http://hci.it.itba.edu.ar/v1/api/review.groovy?method=reviewairline</string>
+    <string name="post_exito">¡Gracias por su opinión!</string>
+    <string name="post_fracaso">Algo salió mal, intente luego</string>
+    <string name="post_error">Ocurrió un error, intente luego</string>
 
 </resources>
