@@ -18,15 +18,18 @@ public class ServerJobService extends JobService {
 
     @Override
     public boolean onStartJob(JobParameters params) {
-        Log.d("ServerChecker", "onCreate: start!");
+
 //        Intent service = new Intent(getApplicationContext(), ServerChecker.class);
 //        getApplicationContext().startService(service);
 
        //TODO:LE TENES QUE MANDAR UN AIRLINE ID Y UN  FLIGHT NUMBER.
-       new APINotify("8R",8700).execute();
+       new APINotify("8R", 8700).execute();
 
        //Status va a tener estos valores: S (programado), A (activo), R (desviado), L(aterrizado) y C (cancelado)
         String status =  state.getStatus().getStatus();
+
+
+        Log.d("ServerChecker", "onCreate: start! " + status);
 
 
         Util.scheduleJob(getApplicationContext()); // reschedule the job
