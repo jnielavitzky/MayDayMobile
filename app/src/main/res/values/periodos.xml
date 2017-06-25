@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="periodos">
+        <item>1 minuto</item>
+        <item>5 minutos</item>
+        <item>1 hora</item>
+        <item>3 horas</item>
+    </string-array>
+</resources>
