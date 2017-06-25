@@ -18,7 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import jnielavitzky.itba.com.maydaymobile.API.API;
 import jnielavitzky.itba.com.maydaymobile.APINotify.APINotify;
-import jnielavitzky.itba.com.maydaymobile.Notifications.Notifications;
+//import jnielavitzky.itba.com.maydaymobile.Notifications.Notifications;
 
 
 public class MainActivity extends AppCompatActivity

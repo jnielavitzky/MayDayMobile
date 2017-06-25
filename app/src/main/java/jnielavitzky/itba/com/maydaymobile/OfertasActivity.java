@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import jnielavitzky.itba.com.maydaymobile.API.Offer;
-import jnielavitzky.itba.com.maydaymobile.Notifications.Notifications;
+//import jnielavitzky.itba.com.maydaymobile.Notifications.Notifications;
 
 //import jnielavitzky.itba.com.maydaymobile.API.Offer;
 

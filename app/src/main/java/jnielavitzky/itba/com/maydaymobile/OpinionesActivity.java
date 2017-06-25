@@ -46,6 +46,8 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
     int amabilidad, confort, relacion, puntualidad, programa, comida;
 
+    Toast seis, ingrese, letras, numeros;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -171,6 +173,12 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
         opinions.setVisibility(View.INVISIBLE);
 
+        if (ingrese != null) {
+            ingrese.cancel();
+        }
+        ingrese = Toast.makeText(getContext(), R.string.query_hint, Toast.LENGTH_SHORT);
+        ingrese.show();
+
         return rootView;
     }
 
@@ -178,21 +186,39 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
     public boolean onQueryTextSubmit(String query) {
 
         if (query.length() == 1 || query.length() == 2) {
-            Toast.makeText(getContext(), R.string.query_hint, Toast.LENGTH_SHORT).show();
+
+            if (ingrese != null) {
+                ingrese.cancel();
+            }
+            ingrese = Toast.makeText(getContext(), R.string.query_hint, Toast.LENGTH_SHORT);
+            ingrese.show();
+
             return false;
         }
 
         String airline_code_1 = query.substring(0);
 
         if (!Character.isLetter(airline_code_1.charAt(0)) || Character.isSpaceChar(airline_code_1.charAt(0))) {
-            Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT).show();
+
+            if (letras != null) {
+                letras.cancel();
+            }
+            letras = Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT);
+            letras.show();
+
             return false;
         }
 
         String airline_code_2 = query.substring(1);
 
         if (!Character.isLetter(airline_code_2.charAt(0)) || Character.isSpaceChar(airline_code_2.charAt(0))) {
-            Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT).show();
+
+            if (letras != null) {
+                letras.cancel();
+            }
+            letras = Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT);
+            letras.show();
+
             return false;
         }
 
@@ -200,7 +226,13 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
         for (int i = 0; i < flight_number.length(); i++) {
             if (!Character.isDigit(flight_number.charAt(i))) {
-                Toast.makeText(getContext(), R.string.error_numero_vuelo, Toast.LENGTH_SHORT).show();
+
+                if (numeros != null) {
+                    numeros.cancel();
+                }
+                numeros = Toast.makeText(getContext(), R.string.error_numero_vuelo, Toast.LENGTH_SHORT);
+                numeros.show();
+
                 return false;
             }
         }
@@ -223,8 +255,15 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
     @Override
     public boolean onQueryTextChange(String newText) {
+
         if (newText.length() > 6) {
-            Toast.makeText(getContext(), R.string.no_mas_6_caracs, Toast.LENGTH_SHORT).show();
+
+            if (seis != null) {
+                seis.cancel();
+            }
+            seis = Toast.makeText(getContext(), R.string.no_mas_6_caracs, Toast.LENGTH_SHORT);
+            seis.show();
+
             sv.setQuery(newText.substring(0, 6), false);
             return false;
         }
