@@ -1,11 +1,15 @@
 package jnielavitzky.itba.com.maydaymobile;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,10 +22,14 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -29,6 +37,8 @@ import jnielavitzky.itba.com.maydaymobile.API.Review.ReviewPoster;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Response;
+
+import static jnielavitzky.itba.com.maydaymobile.MainActivity.TAG;
 
 
 public class OpinionesActivity extends Fragment implements SearchView.OnQueryTextListener {
@@ -40,11 +50,22 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
     TableLayout opinions;
 
+    ScrollView scroll;
+
     MenuItem item;
 
     boolean yes_recommend;
 
     int amabilidad, confort, relacion, puntualidad, programa, comida;
+
+    Toast seis, ingrese, letras, numeros;
+
+    ProgressDialog pd;
+
+    private static final int SIN_METODO = 1;
+    private static final int METODO_INVALIDO = 2;
+    private static final int REVIEW_INVALIDO = 3;
+    private static final int ERROR_DESCONOCIDO = 4;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -167,6 +188,10 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
         LayoutInflater infl = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         LinearLayout layout = (LinearLayout) infl.inflate(R.layout.rating_template, null);
 
+        scroll = (ScrollView) rootView.findViewById(R.id.scroll);
+
+        scroll.setVisibility(View.INVISIBLE);
+
         opinions.addView(layout);
 
         opinions.setVisibility(View.INVISIBLE);
@@ -178,21 +203,39 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
     public boolean onQueryTextSubmit(String query) {
 
         if (query.length() == 1 || query.length() == 2) {
-            Toast.makeText(getContext(), R.string.query_hint, Toast.LENGTH_SHORT).show();
+
+            if (ingrese != null) {
+                ingrese.cancel();
+            }
+            ingrese = Toast.makeText(getContext(), R.string.query_hint, Toast.LENGTH_SHORT);
+            ingrese.show();
+
             return false;
         }
 
         String airline_code_1 = query.substring(0);
 
         if (!Character.isLetter(airline_code_1.charAt(0)) || Character.isSpaceChar(airline_code_1.charAt(0))) {
-            Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT).show();
+
+            if (letras != null) {
+                letras.cancel();
+            }
+            letras = Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT);
+            letras.show();
+
             return false;
         }
 
         String airline_code_2 = query.substring(1);
 
         if (!Character.isLetter(airline_code_2.charAt(0)) || Character.isSpaceChar(airline_code_2.charAt(0))) {
-            Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT).show();
+
+            if (letras != null) {
+                letras.cancel();
+            }
+            letras = Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT);
+            letras.show();
+
             return false;
         }
 
@@ -200,7 +243,13 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
 
         for (int i = 0; i < flight_number.length(); i++) {
             if (!Character.isDigit(flight_number.charAt(i))) {
-                Toast.makeText(getContext(), R.string.error_numero_vuelo, Toast.LENGTH_SHORT).show();
+
+                if (numeros != null) {
+                    numeros.cancel();
+                }
+                numeros = Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT);
+                numeros.show();
+
                 return false;
             }
         }
@@ -213,18 +262,26 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
         ToggleButton toggleButton = (ToggleButton) getView().findViewById(R.id.recToggle);
         toggleButton.setChecked(true);
 
+        scroll.setVisibility(View.VISIBLE);
+
         opinions.setVisibility(View.VISIBLE);
 
         sv.clearFocus();
-
 
         return true;
     }
 
     @Override
     public boolean onQueryTextChange(String newText) {
+
         if (newText.length() > 6) {
-            Toast.makeText(getContext(), R.string.no_mas_6_caracs, Toast.LENGTH_SHORT).show();
+
+            if (seis != null) {
+                seis.cancel();
+            }
+            seis = Toast.makeText(getContext(), R.string.no_mas_6_caracs, Toast.LENGTH_SHORT);
+            seis.show();
+
             sv.setQuery(newText.substring(0, 6), false);
             return false;
         }
@@ -263,16 +320,21 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
             @Override
             public void onResponse(Call call, Response response) throws IOException {
                 if (response.isSuccessful()) {
-                    String responseStr = response.body().string();
+                    final String responseStr = response.body().string();
                     hideKeyboard(getContext());
 
                     getActivity().runOnUiThread(new Runnable() {
                         public void run() {
-                            Toast.makeText(getContext(), R.string.post_exito, Toast.LENGTH_SHORT).show();
+                            pd = new ProgressDialog(getActivity());
+                            pd.setMessage(getString(R.string.espere_por_favor));
+                            pd.setCancelable(false);
+                            pd.show();
+
+                            processResponse(responseStr);
+                            System.out.println(responseStr);
                         }
                     });
 
-                    System.out.println(responseStr);
                 } else {
 
                     getActivity().runOnUiThread(new Runnable() {
@@ -284,6 +346,107 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
                 }
             }
         });
+
+    }
+
+    private void processResponse(String responseStr) {
+        JSONObject jresult;
+
+        try {
+            jresult = new JSONObject(responseStr);
+
+            if (jresult.has("error")) {
+                JSONObject error = jresult.getJSONObject("error");
+                int code = error.getInt("code");
+
+                switch (code) {
+                    case 1: {
+                        error(SIN_METODO);
+                        break;
+                    }
+                    case 100: {
+                        error(METODO_INVALIDO);
+                        break;
+                    }
+                    case 122: {
+                        error(REVIEW_INVALIDO);
+                        break;
+                    }
+                    case 999: {
+                        error(ERROR_DESCONOCIDO);
+                        break;
+                    }
+
+
+                }
+            } else {
+
+                if (pd.isShowing()){
+                    pd.dismiss();
+                }
+
+                getActivity().runOnUiThread(new Runnable() {
+                    public void run() {
+                        Toast.makeText(getContext(), R.string.post_exito, Toast.LENGTH_LONG).show();
+                        sv.clearFocus();
+                    }
+                });
+            }
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void error(int code) {
+        Log.d(TAG, "error: code: " + code);
+
+        if (pd.isShowing()) {
+            pd.dismiss();
+        }
+
+        Context context = getContext();
+        String error_s = "";
+
+        switch (code) {
+            case SIN_METODO: {
+                error_s = getString(R.string.SIN_METODO);
+                break;
+            }
+            case METODO_INVALIDO: {
+                error_s = getString(R.string.METODO_INVALIDO);
+                break;
+            }
+            case REVIEW_INVALIDO: {
+                error_s = getString(R.string.REVIEW_INVALIDO);
+                break;
+            }
+            case ERROR_DESCONOCIDO:
+            default: {
+                error_s = getString(R.string.UNKNOWN);
+                break;
+            }
+
+        }
+
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        builder1.setMessage(error_s);
+        builder1.setTitle("ERROR");
+        builder1.setCancelable(true);
+
+        builder1.setPositiveButton(
+                "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+
+
+        AlertDialog alert11 = builder1.create();
+        alert11.show();
+        sv.clearFocus();
 
     }
 }

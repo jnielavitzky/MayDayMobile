@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="airports">
+        <item>FCO</item>
+        <item>CIA</item>
+        <item>GRU</item>
+        <item>CGH</item>
+        <item>VCP</item>
+        <item>SCL</item>
+        <item>ULC</item>
+        <item>BHI</item>
+        <item>COR</item>
+        <item>NQN</item>
+        <item>UAQ</item>
+        <item>BRC</item>
+        <item>IGR</item>
+        <item>PSS</item>
+        <item>REL</item>
+        <item>FTE</item>
+        <item>JUJ</item>
+        <item>RGL</item>
+        <item>TUC</item>
+        <item>CRD</item>
+        <item>MDZ</item>
+        <item>SLA</item>
+        <item>USH</item>
+        <item>EZE</item>
+        <item>AEP</item>
+        <item>ASU</item>
+        <item>BCN</item>
+        <item>BOG</item>
+        <item>CUN</item>
+        <item>FLN</item>
+    </string-array>
+</resources>

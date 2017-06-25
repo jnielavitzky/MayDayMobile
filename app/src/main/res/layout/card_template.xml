@@ -200,9 +200,9 @@
 
                 <TextView
                     android:id="@+id/salida_to"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:text="Salida:"
+                    android:text="Llegada:"
                     android:layout_below="@+id/info_to"/>
                 <TextView
                     android:id="@+id/salida_time_to"
