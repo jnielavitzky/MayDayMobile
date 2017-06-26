@@ -10,6 +10,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -18,8 +21,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
@@ -132,6 +137,7 @@ public class MisVuelosActivity extends Fragment {
             String flight = data.substring(2);
 
             new JsonTask().execute("http://hci.it.itba.edu.ar/v1/api/status.groovy?method=getflightstatus&airline_id=" + airline + "&flight_number=" + flight);
+
         }
 
 
@@ -564,7 +570,7 @@ public class MisVuelosActivity extends Fragment {
 
         }
 
-        AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+        final AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
         builder1.setMessage(error_s);
         builder1.setTitle("ERROR");
         builder1.setCancelable(true);
@@ -578,8 +584,15 @@ public class MisVuelosActivity extends Fragment {
                 });
 
 
-        alert11 = builder1.create();
-        alert11.show();
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Log.d("UI thread", "I am the UI thread");
+                alert11 = builder1.create();
+                alert11.show();
+            }
+        });
+
     }
 
 }
