@@ -6,7 +6,7 @@
     <string name="titulo_vuelo">Flight</string>
     <string name="salida">Departure:</string>
     <string name="rec_a_otros">Would you recommend it?</string>
-    <string name="query_hint">Type flight number, e.g.,AA1490</string>
+    <string name="query_hint">Type flight id, e.g., AA1490</string>
     <string name="puntualidad">Punctuality</string>
     <string name="puerta">Gate:</string>
     <string name="SIN_METODO">Missing method</string>

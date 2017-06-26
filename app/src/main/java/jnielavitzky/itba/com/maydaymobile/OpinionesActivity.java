@@ -247,7 +247,7 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
                 if (numeros != null) {
                     numeros.cancel();
                 }
-                numeros = Toast.makeText(getContext(), R.string.error_codigo_aereo, Toast.LENGTH_SHORT);
+                numeros = Toast.makeText(getContext(), R.string.error_numero_vuelo, Toast.LENGTH_SHORT);
                 numeros.show();
 
                 return false;
