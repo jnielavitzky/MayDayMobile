@@ -112,15 +112,15 @@ public class OfertasActivity extends Fragment {
                 e.printStackTrace();
             }
 
-            ImageButton b = (ImageButton) layout.findViewById(R.id.like);
-            b.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //create card
-                    //add to mis_vuelos
-                    //change color
-                }
-            });
+//            ImageButton b = (ImageButton) layout.findViewById(R.id.like);
+//            b.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    //create card
+//                    //add to mis_vuelos
+//                    //change color
+//                }
+//            });
 
 //            try{
 //                fillData(layout,data);
