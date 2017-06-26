@@ -26,7 +26,7 @@ public class Util {
 
         ComponentName serviceComponent = new ComponentName(context, ServerJobService.class);
         JobInfo.Builder builder = new JobInfo.Builder(0, serviceComponent);
-        builder.setMinimumLatency(delay); // wait at least //TODO: Aca meter el lapso de cuato esperar entre cada check.
+        builder.setMinimumLatency(delay); // wait at least
         builder.setOverrideDeadline(3 * delay); // maximum delay
         //builder.setRequiredNetworkType(JobInfo.NETWORK_TYPE_UNMETERED); // require unmetered network
         //builder.setRequiresDeviceIdle(true); // device should be idle

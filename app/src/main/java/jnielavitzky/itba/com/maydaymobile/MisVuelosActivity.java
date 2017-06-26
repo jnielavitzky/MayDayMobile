@@ -190,7 +190,6 @@ public class MisVuelosActivity extends Fragment {
             final View child = cardList.getChildAt(i);
             if (child instanceof CardLayout && child.getTag().equals(card_id)) {
                 cardList.removeView(child);
-                //TODO: Eliminar de aca el vuelo favorito.
                 SharedPreferences sharedPref = getActivity().getSharedPreferences("PREF_NAME", Context.MODE_PRIVATE);
                 sharedPref.edit().remove(card_id).commit();
             }
@@ -249,7 +248,6 @@ public class MisVuelosActivity extends Fragment {
         }
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
     }
 
@@ -275,7 +273,6 @@ public class MisVuelosActivity extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 

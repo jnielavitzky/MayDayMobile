@@ -36,7 +36,6 @@ import jnielavitzky.itba.com.maydaymobile.API.Offer;
 /**
  * Created by ioninielavitzky on 6/23/17.
  *
- * TODO: Usar: https://github.com/etsy/AndroidStaggeredGrid
  */
 
 public class OfertasActivity extends Fragment {
@@ -135,7 +134,6 @@ public class OfertasActivity extends Fragment {
         price.setText(data.getString("price"));
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
 //        if (mListener != null) {
 //            mListener.onFragmentInteraction(uri);
@@ -170,7 +168,6 @@ public class OfertasActivity extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 }
