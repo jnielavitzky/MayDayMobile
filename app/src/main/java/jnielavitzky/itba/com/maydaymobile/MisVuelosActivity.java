@@ -588,7 +588,8 @@ public class MisVuelosActivity extends Fragment {
             @Override
             public void run() {
                 Log.d("UI thread", "I am the UI thread");
-                alert11 = builder1.create();
+                if (alert11 == null)
+                    alert11 = builder1.create();
                 alert11.show();
             }
         });
