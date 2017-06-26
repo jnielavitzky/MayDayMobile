@@ -529,13 +529,16 @@ public class MisVuelosActivity extends Fragment {
         }
     }
 
-
+    AlertDialog alert11;
     private void error(int code) {
         askedTickets = 0;
         Log.d(TAG, "error: code: " + code);
         if (pd.isShowing()){
             pd.dismiss();
         }
+
+        if (alert11 != null && alert11.isShowing())
+            alert11.dismiss();
 
         Context context = getContext();
         String error_s = "";
@@ -575,7 +578,7 @@ public class MisVuelosActivity extends Fragment {
                 });
 
 
-        AlertDialog alert11 = builder1.create();
+        alert11 = builder1.create();
         alert11.show();
     }
 
