@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
-                    android:text="1 estrella = muy disconforme"
+                    android:text="@string/onestar"
                     android:textColor="@color/grey_title" />
 
                 <TextView
@@ -53,7 +53,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/info_from"
-                    android:text="5 estrellas = muy conforme"
+                    android:text="@string/fivestars"
                     android:textColor="@color/grey_title" />
 
 
@@ -87,7 +87,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
-                    android:text="Amabilidad"
+                    android:text="@string/amabilidad"
                     android:textAlignment="center"
                     android:textColor="@color/black_button"
                     android:textSize="25sp" />
@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
-                    android:text="Comida"
+                    android:text="@string/comida"
                     android:textAlignment="center"
                     android:textColor="@color/black_button"
                     android:textSize="25sp" />
@@ -149,7 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
-                    android:text="Puntualidad"
+                    android:text="@string/puntualidad"
                     android:textAlignment="center"
                     android:textColor="@color/black_button"
                     android:textSize="25sp" />
@@ -180,7 +180,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
-                    android:text="Programa de viajeros frecuentes"
+                    android:text="@string/programa_de_viajeros_frecuentes"
                     android:textAlignment="center"
                     android:textColor="@color/black_button"
                     android:textSize="25sp" />
@@ -211,7 +211,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
-                    android:text="Confort"
+                    android:text="@string/confort"
                     android:textAlignment="center"
                     android:textColor="@color/black_button"
                     android:textSize="25sp" />
@@ -242,7 +242,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_alignParentTop="true"
-                    android:text="Relación precio/calidad"
+                    android:text="@string/relacion_precio_calidad"
                     android:textAlignment="center"
                     android:textColor="@color/black_button"
                     android:textSize="25sp" />

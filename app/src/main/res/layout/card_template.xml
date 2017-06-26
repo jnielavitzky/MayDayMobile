@@ -40,7 +40,7 @@
                     android:layout_height="30dp"
                     android:textSize="18sp"
                     android:layout_marginTop="15dp"
-                    android:text="Estado de vuelo: "
+                    android:text="@string/estado_de_vuelo"
                     android:textColor="@color/grey_title"/>
                 <TextView
                     android:id="@+id/estado"
@@ -115,7 +115,7 @@
                     android:id="@+id/salida_from"
                     android:layout_width="50dp"
                     android:layout_height="20dp"
-                    android:text="Salida:"
+                    android:text="@string/salida"
                     android:layout_below="@+id/info_from"/>
                 <TextView
                     android:id="@+id/salida_time_from"
@@ -131,7 +131,7 @@
                     android:id="@+id/terminal_from"
                     android:layout_width="65dp"
                     android:layout_height="20dp"
-                    android:text="Terminal:"
+                    android:text="@string/terminal"
                     android:layout_marginRight="30dp"
                     android:layout_below="@+id/info_from"
                     android:layout_toRightOf="@+id/salida_time_from"/>
@@ -171,7 +171,7 @@
                         android:id="@+id/despegue_program"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:text="Despegue programado: "/>
+                        android:text="@string/despegue_programado"/>
                     <TextView
                         android:id="@+id/despegue_program_time"
                         android:layout_width="wrap_content"
@@ -202,7 +202,7 @@
                     android:id="@+id/salida_to"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp"
-                    android:text="Llegada:"
+                    android:text="@string/llegada"
                     android:layout_below="@+id/info_to"/>
                 <TextView
                     android:id="@+id/salida_time_to"
@@ -218,7 +218,7 @@
                     android:id="@+id/terminal_to"
                     android:layout_width="65dp"
                     android:layout_height="20dp"
-                    android:text="Terminal:"
+                    android:text="@string/terminal"
                     android:layout_marginRight="30dp"
                     android:layout_below="@+id/info_to"
                     android:layout_toRightOf="@+id/salida_time_to"/>
@@ -236,7 +236,7 @@
                     android:id="@+id/gate"
                     android:layout_width="65dp"
                     android:layout_height="20dp"
-                    android:text="Puerta:"
+                    android:text="@string/puerta"
                     android:layout_below="@+id/info_to"
                     android:layout_toRightOf="@+id/terminal_to"/>
                 <TextView
@@ -257,7 +257,7 @@
                         android:id="@+id/aterrizaje_program"
                         android:layout_width="wrap_content"
                         android:layout_height="30dp"
-                        android:text="Aterrizaje programado: "/>
+                        android:text="@string/aterrizaje_programado"/>
                     <TextView
                         android:id="@+id/aterrizaje_program_time"
                         android:layout_width="wrap_content"

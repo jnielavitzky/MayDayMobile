@@ -9,18 +9,22 @@
     tools:context="jnielavitzky.itba.com.maydaymobile.MainActivity"
     android:id="@+id/flContent2">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello Martina!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
-    <Button
-        android:id="@+id/buttonTest"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="Hola"/>
+    <ScrollView
+
+        android:id="@+id/scroll"
+        android:orientation="horizontal"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent">
+
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/ofertas_listview"
+            android:stretchColumns="1">
+
+        </TableLayout>
+
+    </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

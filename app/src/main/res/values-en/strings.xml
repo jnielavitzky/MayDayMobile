@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MayDay Mobile</string>
+    <string name="si">YES</string>
+    <string name="terminal">Terminal:</string>
+    <string name="titulo_vuelo">Flight</string>
+    <string name="salida">Departure:</string>
+    <string name="rec_a_otros">Would you recommend it?</string>
+    <string name="query_hint">Type flight number, e.g.,AA1490</string>
+    <string name="puntualidad">Punctuality</string>
+    <string name="puerta">Gate:</string>
+    <string name="SIN_METODO">Missing method</string>
+    <string name="action_settings">Settings</string>
+    <string name="activo">Active</string>
+    <string name="agregar">Add</string>
+    <string name="agregar_vuelo">Add a new flight</string>
+    <string name="ajustes">Settings</string>
+    <string name="amabilidad">Kindness</string>
+    <string name="aterrizado">Landed</string>
+    <string name="aterrizaje_programado">Estimated landing:</string>
+    <string name="cancelado">Cancelled</string>
+    <string name="comentarios_hint">Type in your comment</string>
+    <string name="comentarios_listo">DONE</string>
+    <string name="comida">Food</string>
+    <string name="configuracion">Settings</string>
+    <string name="confort">Comfort</string>
+    <string name="despegue_programado">Estimated take off:</string>
+    <string name="error_codigo_aereo">Only letters allowed for airline code</string>
+    <string name="error_numero_vuelo">Only numbers allowed for flight number</string>
+    <string name="espere_por_favor">Please, wait</string>
+    <string name="estado_de_vuelo">Flight status: \" \"</string>
+    <string name="fivestars">5 stars = very happy</string>
+    <string name="ingrese_vuelo">Type in flight number</string>
+    <string name="llegada">Landing:</string>
+    <string name="mis_vuelos">My flights</string>
+    <string name="no_flight">Not a valid flight number. Please, try again</string>
+    <string name="no_mas_6_caracs">No more than 6 characters</string>
+    <string name="no_mostrar_mas_vuelo">Don\'t show this flight anymore</string>
+    <string name="ofertas">Flight Offers</string>
+    <string name="onestar">1 star = very unhappy</string>
+    <string name="opiniones">Flight Comments</string>
+    <string name="post_exito">Thank you for your comment</string>
+    <string name="post_fracaso">Something went wrong, try again later</string>
+    <string name="programa_de_viajeros_frecuentes">Frequent flyer program</string>
+    <string name="programado">Programmed</string>
+    <string name="relacion_precio_calidad">Price quality ratio</string>
+    <string name="post_error">Something went wrong, try again later</string>
+    <string name="UNKNOWN">Unknown error. Please try again later</string>
+    <string name="TIMEOUT">Your internet connection seems to be slow. Please try again later</string>
+    <string name="NO_CONNECTION_ERROR">Communication error. Please try again later</string>
+    <string name="ITBA_SERVER_ERROR">There has been an error in the server, please try again later</string>
+    <string name="METODO_INVALIDO">Unknow method. Invalid name</string>
+    <string name="REVIEW_INVALIDO">Invalid comment</string>
+    <string name="desviado">Diverted</string>
+</resources>
