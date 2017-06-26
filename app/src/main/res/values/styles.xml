@@ -7,6 +7,7 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:editTextColor">@android:color/white</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -29,5 +30,6 @@
         <!-- Default color for the dropdown arrow and line -->
         <item name="colorControlNormal">@color/colorAccent</item>
     </style>
+
 
 </resources>

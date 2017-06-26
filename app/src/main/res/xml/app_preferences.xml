@@ -1,0 +1,27 @@
+<android.support.v7.preference.PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="Lenguajes e idiomas">
+        <ListPreference
+            android:key="idioma"
+            android:title="Idioma"
+            android:summary="Elija un idioma"
+            android:entries="@array/idiomas"
+            android:entryValues="@array/idiomas"
+            android:dialogTitle="Elija un idioma..." />
+    </android.support.v7.preference.PreferenceCategory>
+
+
+    <android.support.v7.preference.PreferenceCategory
+        android:title="Notificaciónes">
+        <ListPreference
+            android:key="notifi"
+            android:title="Periodo de pull"
+            android:summary="Elija un un periodo de pulleo de data"
+            android:entries="@array/periodos"
+            android:entryValues="@array/periodos"
+            android:dialogTitle="Elija un un periodo..." />
+    </android.support.v7.preference.PreferenceCategory>
+
+</android.support.v7.preference.PreferenceScreen>

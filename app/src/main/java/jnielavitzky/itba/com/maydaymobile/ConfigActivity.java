@@ -8,6 +8,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v7.preference.ListPreference;
+import android.support.v7.preference.Preference;
+import android.support.v7.preference.PreferenceFragmentCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,7 +21,7 @@ import android.widget.Button;
  * Created by ioninielavitzky on 6/23/17.
  */
 
-public class ConfigActivity extends Fragment {
+public class ConfigActivity extends PreferenceFragmentCompat {
 
     public ConfigActivity() {
     }
@@ -43,19 +46,31 @@ public class ConfigActivity extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public void onCreatePreferences(Bundle bundle, String s) {
+        addPreferencesFromResource(R.xml.app_preferences);
 
-        View view  = inflater.inflate(R.layout.config_fragment, container, false);
+        ListPreference notifi = (ListPreference)findPreference("notifi");
+        ListPreference idioma = (ListPreference)findPreference("notifi");
 
+        idioma.setValue("Español");
+        notifi.setValueIndex(2);
 
+        idioma.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                return false;
+            }
+        });
 
-        ((MainActivity) getActivity()).setActionBarTitle(getResources().getString(R.string.configuracion));
-
-
-        return view;
+        notifi.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object o) {
+                return false;
+            }
+        });
     }
+
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
