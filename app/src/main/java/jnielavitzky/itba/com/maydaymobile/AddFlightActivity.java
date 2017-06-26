@@ -27,6 +27,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -77,6 +78,7 @@ public class AddFlightActivity extends AppCompatActivity{
         setTitle(getString(R.string.agregar_vuelo));
 
         flight_num = (EditText) findViewById(R.id.flight_num);
+        flight_num.setImeOptions(EditorInfo.IME_ACTION_DONE);
         new Handler().postDelayed(new Runnable() {
             public void run() {
                 EditText yourEditText= (EditText) findViewById(R.id.flight_num);
@@ -91,7 +93,9 @@ public class AddFlightActivity extends AppCompatActivity{
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     add_flight();
+                    return false;
                 }
+
                 return true;
             }
         });
@@ -116,6 +120,9 @@ public class AddFlightActivity extends AppCompatActivity{
     private void add_flight() {
 
         String data = flight_num.getText().toString();
+
+        if (data == null || data.equals(""))
+            return;
 
         String airline = data.substring(0, 2);
         String flight = data.substring(2);
