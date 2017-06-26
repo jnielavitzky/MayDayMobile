@@ -12,7 +12,7 @@
     <string name="ajustes">Ajustes</string>
 
     <!--Para card_template-->
-    <string name="estado_de_vuelo">Estado de vuelo: " "</string>
+    <string name="estado_de_vuelo">Estado de vuelo: </string>
     <string name="salida">Salida:</string>
     <string name="terminal">Terminal:</string>
     <string name="puerta">Puerta:</string>

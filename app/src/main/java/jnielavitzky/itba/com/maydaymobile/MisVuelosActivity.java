@@ -436,7 +436,7 @@ public class MisVuelosActivity extends Fragment {
         JSONObject status_data = new JSONObject();
         status_data.put("desde", departure_airport_id);
         status_data.put("hasta", arrival_airport_id);
-        status_data.put("estado", status_string);
+        status_data.put("estado", " " + status_string);
         status_data.put("info_from", departure_airport_desc + " • " + departure_date_formated);
         status_data.put("salida_time_from", departure_time_formated);
         status_data.put("terminal_num_from", departure_terminal);

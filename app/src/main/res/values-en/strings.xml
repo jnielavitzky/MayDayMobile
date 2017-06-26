@@ -28,7 +28,7 @@
     <string name="error_codigo_aereo">Only letters allowed for airline code</string>
     <string name="error_numero_vuelo">Only numbers allowed for flight number</string>
     <string name="espere_por_favor">Please, wait</string>
-    <string name="estado_de_vuelo">Flight status: \" \"</string>
+    <string name="estado_de_vuelo">Flight status: </string>
     <string name="fivestars">5 stars = very happy</string>
     <string name="ingrese_vuelo">Type in flight number</string>
     <string name="llegada">Landing:</string>

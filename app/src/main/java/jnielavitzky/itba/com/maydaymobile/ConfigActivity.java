@@ -53,8 +53,13 @@ public class ConfigActivity extends PreferenceFragmentCompat {
         ListPreference notifi = (ListPreference)findPreference("notifi");
         ListPreference idioma = (ListPreference)findPreference("notifi");
 
+        SharedPreferences sharedPref = getActivity().getSharedPreferences("config", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        int delay = Integer.parseInt(sharedPref.getString("delay", "5"));
+
         idioma.setValue("Español");
-        notifi.setValueIndex(2);
+        notifi.setValue(""+delay);
 
         idioma.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -72,8 +77,10 @@ public class ConfigActivity extends PreferenceFragmentCompat {
                 editor.putString("delay", selected);
                 editor.commit();
 
+
+
                 Util.scheduleJob(getContext());
-                return false;
+                return true;
             }
         });
     }
