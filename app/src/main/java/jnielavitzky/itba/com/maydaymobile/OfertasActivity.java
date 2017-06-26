@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.nfc.cardemulation.OffHostApduService;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 
@@ -19,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -81,6 +83,19 @@ public class OfertasActivity extends Fragment {
         TableLayout offersList = (TableLayout) view.findViewById(R.id.ofertas_listview);
 
         JSONObject data = new JSONObject();
+
+        if (myOffers == null){
+            Handler mainHandler = new Handler(getActivity().getMainLooper());
+
+            Runnable myRunnable = new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getContext(), R.string.post_error, Toast.LENGTH_SHORT).show();
+                } // This is your code
+            };
+            mainHandler.post(myRunnable);
+            return view;
+        }
 
         for(Deals deal : myOffers.getDeals()){
 
