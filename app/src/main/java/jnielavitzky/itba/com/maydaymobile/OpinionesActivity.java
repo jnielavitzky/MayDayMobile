@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -314,7 +315,16 @@ public class OpinionesActivity extends Fragment implements SearchView.OnQueryTex
             public void onFailure(Call call, IOException e) {
                 // Something went wrong
                 e.printStackTrace();
-                Toast.makeText(getContext(), R.string.post_error, Toast.LENGTH_SHORT).show();
+                Handler mainHandler = new Handler(getActivity().getMainLooper());
+
+                Runnable myRunnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getContext(), R.string.post_error, Toast.LENGTH_SHORT).show();
+                    } // This is your code
+                };
+                mainHandler.post(myRunnable);
+
             }
 
             @Override
