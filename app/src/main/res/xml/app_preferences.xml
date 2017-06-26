@@ -20,7 +20,7 @@
             android:title="Periodo de pull"
             android:summary="Elija un un periodo de pulleo de data"
             android:entries="@array/periodos"
-            android:entryValues="@array/periodos"
+            android:entryValues="@array/periodos_v"
             android:dialogTitle="Elija un un periodo..." />
     </android.support.v7.preference.PreferenceCategory>
 

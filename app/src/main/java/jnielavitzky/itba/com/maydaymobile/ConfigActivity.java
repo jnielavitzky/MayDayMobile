@@ -4,6 +4,7 @@ package jnielavitzky.itba.com.maydaymobile;
  * Created by ioninielavitzky on 6/23/17.
  */
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -65,6 +66,13 @@ public class ConfigActivity extends PreferenceFragmentCompat {
         notifi.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
             public boolean onPreferenceChange(Preference preference, Object o) {
+                String selected = o.toString();
+                SharedPreferences sharedPref = getActivity().getSharedPreferences("config", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("delay", selected);
+                editor.commit();
+
+                Util.scheduleJob(getContext());
                 return false;
             }
         });
