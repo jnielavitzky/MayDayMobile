@@ -188,11 +188,12 @@ public class ServerJobService extends JobService {
         Log.d(TAG, "sendNotification: flight: " + number + " is " + getStatusString(code));
 
 
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.plane)
-                        .setContentTitle("Alerta de vuelo!")
-                        .setContentText("El vuelo " + number + " esta " + getStatusString(code));
+                        .setContentTitle(getString(R.string.alerta_vuelo))
+                        .setContentText(getString(R.string.el_vuelo) + " " + number + " " + getString(R.string.esta) + " " + getStatusString(code));
 
 
         Random r = new Random();

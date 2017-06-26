@@ -52,4 +52,7 @@
     <string name="METODO_INVALIDO">Unknow method. Invalid name</string>
     <string name="REVIEW_INVALIDO">Invalid comment</string>
     <string name="desviado">Diverted</string>
+    <string name="el_vuelo">The flight</string>
+    <string name="esta">is</string>
+    <string name="alerta_vuelo">Flight alert!</string>
 </resources>
